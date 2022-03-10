@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                <a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/home">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">My Books</a>
@@ -52,7 +52,7 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>
           </form>
-          <a class="nav-link text-white">Login</a>
+          <a class="nav-link text-white" href="<?php echo base_url() ?>/login">Login</a>
         </div>
       </div>
     </nav>
