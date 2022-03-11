@@ -19,4 +19,9 @@ class BooksModel extends Model
 
 		return $this->where(['slug' => $slug])->first();
 	}
+	
+	public function getRecent()
+	{
+		return $this->orderBy('id', 'DESC')->findAll(12);
+	}
 }
