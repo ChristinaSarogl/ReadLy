@@ -5,8 +5,13 @@
 				<div class="card-body px-5 py-2 text-center">
 					<p class="fw-bold fs-4 mb-3 text-uppercase text-white">Register</p>
 					<p class="mb-3" id="error-message"></p>
+					
+					<?= session()->getFlashdata('error') ?>
+					<?= service('validation')->listErrors() ?>
 
-					<form class="text-start" id="register-form">
+					<form action="<?=site_url()?>/register" method="post" class="text-start" id="register-form">
+						<?= csrf_field() ?>
+						
 						<div class="mb-3 px-3">
 							<input type="text" id="register-username" class="form-control"
 								placeholder="Username" required>
