@@ -9,4 +9,11 @@ class Home extends BaseController
         echo view('templates/header');
 		echo view('templates/footer');
     }
+	
+	public function profile()
+    {
+        echo view('templates/header');
+		echo view('pages/profile');
+		echo view('templates/footer');
+    }
 }

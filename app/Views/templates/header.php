@@ -26,7 +26,7 @@
                 <a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">My Books</a>
+                <a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/profile">Profile</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="broswe" role="button" data-bs-toggle="dropdown" aria-expanded="false">
