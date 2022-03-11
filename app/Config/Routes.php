@@ -31,6 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->match(['get', 'post'], '/add_book', 'Home::addBook');
 $routes->get('/home', 'Home::home');
 $routes->get('/login', 'Login::login');
 $routes->get('/register', 'Login::register');

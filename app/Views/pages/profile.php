@@ -25,7 +25,7 @@
 		</table>
 
 		<div class="d-flex flex-row flex-md-column">
-			<button class="btn btn-outline-success m-2">Add book</button>
+			<a class="btn btn-outline-success m-2" href="<?php echo base_url() ?>/add_book">Add book</a>
 			<button class="btn btn-outline-danger m-2">Disconnect</button>
 		</div>            
 	</div>       
@@ -57,41 +57,6 @@
 	
 
 	<div class="row mx-0 mt-2">
-		<div class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center">
-		  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-			<img class="align-middle h-auto cover border-0 img-fluid" src="life_of_pi.jpg" width="140px">
-			<figcaption class="figure-caption">Life of Pi</figcaption>
-		  </figure>
-		</div>
-		<div class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center">
-		  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-			<img class="align-middle h-auto cover border-0 img-fluid" src="life_of_pi.jpg" width="140px">
-			<figcaption class="figure-caption">Life of Pi</figcaption>
-		  </figure>
-		</div>
-		<div class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center">
-		  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-			<img class="align-middle h-auto cover border-0 img-fluid" src="life_of_pi.jpg" width="140px">
-			<figcaption class="figure-caption">Life of Pi</figcaption>
-		  </figure>
-		</div>
-		<div class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center">
-		  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-			<img class="align-middle h-auto cover border-0 img-fluid" src="life_of_pi.jpg" width="140px">
-			<figcaption class="figure-caption">Life of Pi</figcaption>
-		  </figure>
-		</div>
-		<div class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center">
-		  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-			<img class="align-middle h-auto cover border-0 img-fluid" src="life_of_pi.jpg" width="140px">
-			<figcaption class="figure-caption">Life of Pi</figcaption>
-		  </figure>
-		</div>
-		<div class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center ">
-		  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-			<img class="align-middle h-auto cover border-0 img-fluid" src="life_of_pi.jpg" width="140px">
-			<figcaption class="figure-caption">Life of Pi</figcaption>
-		  </figure>
-		</div>
+		
 	</div>
 </div>
