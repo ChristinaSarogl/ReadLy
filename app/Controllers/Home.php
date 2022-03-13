@@ -31,7 +31,7 @@ class Home extends BaseController
 	{		
 		$modelBooks = model(BooksModel::class);
 		$modelCover = model(CoversModel::class);
-				
+		
 		if ($this->request->getMethod() === 'post' && $this->validate([
 			'title' => 'required|min_length[3]',
 			'author' => 'required',
