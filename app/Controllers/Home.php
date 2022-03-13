@@ -41,7 +41,7 @@ class Home extends BaseController
 			'bookCover' => 'uploaded[bookCover]',
 		])){			
 			$coverImage = $this->request->getFile('bookCover');			
-			//$coverImage->move(WRITEPATH.'uploads/covers');
+			$coverImage->move(ROOTPATH.'public/covers');
 			
 			$modelCover->save([
 				'file_name' => $coverImage->getName(),
