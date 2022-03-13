@@ -8,7 +8,7 @@
 				<?= session()->getFlashdata('error') ?>
 				<?= service('validation')->listErrors() ?>
 
-                <form action="<?=site_url()?>/add_book" method="post" class="py-3">
+                <form action="<?php echo base_url()?>/add_book" method="post" enctype="multipart/form-data" class="py-3">
 					<?= csrf_field() ?>
 					
                     <div class="row g-3 mb-3">
@@ -125,7 +125,7 @@
                     
                     <div class="mb-3">
                         <label for="add-book-cover" class="form-label">Cover Image</label>
-                        <input type="file" name="book-cover" class="form-control" id="add-book-cover" accept=".png, .jpg" />
+                        <input type="file" name="bookCover" class="form-control" id="add-book-cover" accept=".png, .jpg" />
                     </div>                    
     
                     <input type="submit" class="btn btn-outline-dark btn-lg w-100" value="Add book"/>
