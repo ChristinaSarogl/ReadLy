@@ -9,7 +9,7 @@ class BooksModel extends Model
     protected $table = 'books';
 	
 	protected $allowedFields = ['title', 'author', 'summary',
-		'publisher','release_date','slug','cover'];
+		'publisher','release_date','slug','cover','category'];
 	
 	public function getBooks($slug = false)
 	{

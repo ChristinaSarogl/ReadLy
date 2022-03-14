@@ -29,6 +29,7 @@
 			<hr>
 			<p class="mb-1">Publisher: <?= esc($book['publisher']) ?></p>
 			<p class="mb-1">Release Date: <?= esc($book['release_date']) ?></p>
+			<p class="mb-1">Category: <?= esc($book['category']) ?></p>
 		</div>
 	</div>
 	

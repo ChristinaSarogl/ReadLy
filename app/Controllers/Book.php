@@ -14,9 +14,10 @@ class Book extends BaseController
 			'author' => 'required',
 			'summary' => 'required',
 			'publisher' => 'required|min_length[3]',
-			'release' => 'required',
+			'release' => 'required|valid_date',
+			'category' => 'required',
 			'bookCover' => 'uploaded[bookCover]',
-		])){			
+		])){					
 			$coverImage = $this->request->getFile('bookCover');	
 			$coverImage->move(ROOTPATH.'public/covers');
 			
@@ -35,6 +36,7 @@ class Book extends BaseController
 				'release_date' => $this->request->getPost('release'),
 				'slug'  => url_title($this->request->getPost('title'), '-', true),
 				'cover' => $cover_id,
+				'category' => $this->request->getPost('category')
 			]);
 			
 			return redirect()->to('/home');

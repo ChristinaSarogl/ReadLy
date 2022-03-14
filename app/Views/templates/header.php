@@ -37,13 +37,10 @@
                     <li><a class="dropdown-item" href="#">Crime & Mystery</a></li>
                     <li><a class="dropdown-item" href="#">Fantasy</a></li>
                     <li><a class="dropdown-item" href="#">Historical Fiction</a></li>
-                    <li><a class="dropdown-item" href="#">Horror</a></li>
-                    <li><a class="dropdown-item" href="#">Humour</a></li>
+                    <li><a class="dropdown-item" href="#">Horror & Thriller</a></li>
                     <li><a class="dropdown-item" href="#">LGBTQ+</a></li>                            
                     <li><a class="dropdown-item" href="#">Romance</a></li>
                     <li><a class="dropdown-item" href="#">Science Fiction</a></li>
-                    <li><a class="dropdown-item" href="#">Thriller</a></li>
-                    <li><a class="dropdown-item" href="#">Yound Adults</a></li>
                 </ul>
             </li>                  
           </ul>

@@ -39,83 +39,62 @@
                     </div>
                     
                     <div class="mb-3">
-                        <p>Categories</p>
+                        <p>Category</p>
                         
                         <div class="row">
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-adventure">
+                                    <input class="form-check-input" type="radio" name="category" value="Adventure" id="add-book-adventure">
                                     <label class="form-check-label" for="add-book-adventure">Adventure</label>
                                 </div> 
                             </div>
                             
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-crime-mystery">
+                                    <input class="form-check-input" type="radio" name="category" value="Crime & mystery" id="add-book-crime-mystery">
                                     <label class="form-check-label" for="add-book-crime-mystery">Crime & Mystery</label>
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-fantasy">
+                                    <input class="form-check-input" type="radio" name="category" value="Fantasy" id="add-book-fantasy">
                                     <label class="form-check-label" for="add-book-fantasy">Fantasy</label>
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-historical-fiction">
+                                    <input class="form-check-input" type="radio" name="category" value="Historical" id="add-book-historical-fiction">
                                     <label class="form-check-label" for="add-book-historical-fiction">Historical Fiction</label>
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-horror">
-                                    <label class="form-check-label" for="add-book-horror">Horror</label>
+                                    <input class="form-check-input" type="radio" name="category" value="Horror & Thriller" id="add-book-horror">
+                                    <label class="form-check-label" for="add-book-horror">Horror & Thriller</label>
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-humour">
-                                    <label class="form-check-label" for="add-book-humour">Humour</label>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-sm-5 col-lg-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-lgbt">
+                                    <input class="form-check-input" type="radio" name="category" value="Lgbtq" id="add-book-lgbt">
                                     <label class="form-check-label" for="add-book-lgbt">LGBTQ+</label>
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-romance">
+                                    <input class="form-check-input" type="radio" name="category" value="Romance" id="add-book-romance">
                                     <label class="form-check-label" for="add-book-romance">Romance</label>
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-sci-fi">
+                                    <input class="form-check-input" type="radio" name="category" value="Sci-fi" id="add-book-sci-fi">
                                     <label class="form-check-label" for="add-book-sci-fi">Science Fiction</label>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-sm-5 col-lg-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-thriller">
-                                    <label class="form-check-label" for="add-book-thriller">Thriller</label>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-sm-5 col-lg-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="add-book-ya">
-                                    <label class="form-check-label" for="add-book-ya">Yound Adults</label>
                                 </div>
                             </div>
 
