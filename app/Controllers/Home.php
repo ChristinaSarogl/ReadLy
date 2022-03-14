@@ -40,7 +40,7 @@ class Home extends BaseController
 			'release' => 'required',
 			'bookCover' => 'uploaded[bookCover]',
 		])){			
-			$coverImage = $this->request->getFile('bookCover');			
+			$coverImage = $this->request->getFile('bookCover');	
 			$coverImage->move(ROOTPATH.'public/covers');
 			
 			$modelCover->save([
@@ -60,7 +60,7 @@ class Home extends BaseController
 				'cover' => $cover_id,
 			]);
 			
-			return redirect()->to('/home'); 
+			return redirect()->to('/home');
 		} else {
 			echo view('templates/header');
 			echo view('pages/addBook');
