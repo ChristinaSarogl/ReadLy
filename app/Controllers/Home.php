@@ -26,4 +26,22 @@ class Home extends BaseController
 		echo view('pages/profile');
 		echo view('templates/footer');
     }
+	
+	public function category($category=null)
+	{
+		$modelBooks = model(BooksModel::class);
+		$modelCovers = model(CoversModel::class);
+		
+		$data = [
+			'books'  => $modelBooks->getCategory($category),
+			'recentBooks' => $modelBooks->getRecent($category),
+			'covers' => $modelCovers->getCategory($category),
+			'recentCovers' => $modelCovers->getRecent($category),
+			
+		];
+		
+		echo view('templates/header');
+		echo view('pages/showCategory', $data);
+		echo view('templates/footer');
+	}
 }

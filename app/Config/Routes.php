@@ -37,6 +37,7 @@ $routes->get('/login', 'Login::login');
 $routes->get('/register', 'Login::register');
 $routes->get('/profile', 'Home::profile');
 $routes->get('/book/(:segment)/(:segment)', 'Book::view/$1/$2');
+$routes->get('/browse/(:segment)', 'Home::category/$1');
 
 
 /*

@@ -51,7 +51,7 @@
                             
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="category" value="Crime & mystery" id="add-book-crime-mystery">
+                                    <input class="form-check-input" type="radio" name="category" value="Crime-Mystery" id="add-book-crime-mystery">
                                     <label class="form-check-label" for="add-book-crime-mystery">Crime & Mystery</label>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
 
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="category" value="Horror & Thriller" id="add-book-horror">
+                                    <input class="form-check-input" type="radio" name="category" value="Horror-Thriller" id="add-book-horror">
                                     <label class="form-check-label" for="add-book-horror">Horror & Thriller</label>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ class CoversModel extends Model
 {
     protected $table = 'book_covers';
 	
-	protected $allowedFields = ['file_name', 'file_type'];
+	protected $allowedFields = ['file_name', 'file_type','category'];
 	
 	public function getLastIndex()
 	{
@@ -20,8 +20,16 @@ class CoversModel extends Model
 		return $this->where(['id' => $id])->first();
 	}
 	
-	public function getRecent()
+	public function getRecent($category = false)
 	{
-		return $this->orderBy('id', 'DESC')->findAll(12);
+		if ($category === false) {
+			return $this->orderBy('id', 'DESC')->findAll(12);
+		}
+		return $this->where(['category' => $category])->orderBy('id', 'DESC')->findAll(12);
+	}
+	
+	public function getCategory($category = null)
+	{
+		return $this->where(['category' => $category])->findAll();
 	}
 }

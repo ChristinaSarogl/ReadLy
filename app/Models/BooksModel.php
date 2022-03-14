@@ -25,8 +25,16 @@ class BooksModel extends Model
 		return $this->where(['id' => $id])->first();
 	}
 	
-	public function getRecent()
+	public function getRecent($category = false)
 	{
-		return $this->orderBy('id', 'DESC')->findAll(12);
+		if ($category === false) {
+			return $this->orderBy('id', 'DESC')->findAll(12);
+		}
+		return $this->where(['category' => $category])->orderBy('id', 'DESC')->findAll(12);
+	}
+	
+	public function getCategory($category = null)
+	{
+		return $this->where(['category' => $category])->findAll();
 	}
 }

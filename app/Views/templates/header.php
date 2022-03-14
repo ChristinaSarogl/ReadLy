@@ -33,14 +33,14 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <ul class="list-group list-group-horizontal"></ul>                            
-                    <li><a class="dropdown-item" href="#">Adventure</a></li>
-                    <li><a class="dropdown-item" href="#">Crime & Mystery</a></li>
-                    <li><a class="dropdown-item" href="#">Fantasy</a></li>
-                    <li><a class="dropdown-item" href="#">Historical Fiction</a></li>
-                    <li><a class="dropdown-item" href="#">Horror & Thriller</a></li>
-                    <li><a class="dropdown-item" href="#">LGBTQ+</a></li>                            
-                    <li><a class="dropdown-item" href="#">Romance</a></li>
-                    <li><a class="dropdown-item" href="#">Science Fiction</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Adventure">Adventure</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Crime-Mystery">Crime & Mystery</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Fantasy">Fantasy</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Historical">Historical Fiction</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Horror-Thriller">Horror & Thriller</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Lgbtq">LGBTQ+</a></li>                            
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Romance">Romance</a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Sci-fi">Science Fiction</a></li>
                 </ul>
             </li>                  
           </ul>

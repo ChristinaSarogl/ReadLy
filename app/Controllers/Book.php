@@ -23,7 +23,8 @@ class Book extends BaseController
 			
 			$modelCover->save([
 				'file_name' => $coverImage->getName(),
-				'file_type' => $coverImage->getClientMimeType()
+				'file_type' => $coverImage->getClientMimeType(),
+				'category' => $this->request->getPost('category')
 			]);
 			
 			$cover_id = $modelCover->getLastIndex();
