@@ -15,9 +15,9 @@ class CoversModel extends Model
 		return $this->countAll();
 	}
 	
-	public function getCover($slug = false)
+	public function getCover($id = false)
 	{
-		return $this->where(['slug' => $slug])->first();
+		return $this->where(['id' => $id])->first();
 	}
 	
 	public function getRecent()
