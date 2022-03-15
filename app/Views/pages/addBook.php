@@ -5,7 +5,6 @@
             
             <div class="col-12 col-md-8 col-xl-7">  
 				
-				<?= session()->getFlashdata('error') ?>
 				<?= service('validation')->listErrors() ?>
 
                 <form action="<?php echo base_url()?>/add_book" method="post" enctype="multipart/form-data" class="py-3">
