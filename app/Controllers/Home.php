@@ -10,8 +10,8 @@ class Home extends BaseController
 		$modelCovers = model(CoversModel::class);
 
 		$data = [
-			'books'  => $modelBooks->getRecent(),
-			'covers' => $modelCovers->getRecent(),
+			'books'  => $modelBooks->getRecent(12),
+			'covers' => $modelCovers->getRecent(12),
 		];
 		
 		
@@ -34,9 +34,9 @@ class Home extends BaseController
 		
 		$data = [
 			'books'  => $modelBooks->getCategory($category),
-			'recentBooks' => $modelBooks->getRecent($category),
+			'recentBooks' => $modelBooks->getRecent(6, $category),
 			'covers' => $modelCovers->getCategory($category),
-			'recentCovers' => $modelCovers->getRecent($category),
+			'recentCovers' => $modelCovers->getRecent(6, $category),
 			
 		];
 		

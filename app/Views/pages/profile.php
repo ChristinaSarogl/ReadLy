@@ -26,7 +26,7 @@
 
 		<div class="d-flex flex-row flex-md-column">
 			<a class="btn btn-outline-success m-2" href="<?php echo base_url() ?>/add_book">Add book</a>
-			<button class="btn btn-outline-danger m-2">Disconnect</button>
+			<a class="btn btn-outline-danger m-2" href="<?php echo base_url() ?>/logout">Disconnect</a>
 		</div>            
 	</div>       
 
