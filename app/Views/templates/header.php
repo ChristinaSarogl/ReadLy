@@ -9,16 +9,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> 
 
     <title>ReadLy</title>
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark px-1">
-      <div class="container-fluid">
+      <div class="container-fluid d-flex">
         <a class="navbar-brand" href="#">ReadLy</a>
+		
+		<div class="nav-item pe-1 ms-auto">
+			<button type="button" class="btn btn-outline-light d-block d-lg-none"><i class="bi bi-search"></i></button>
+		</div>
+		<div class="nav-item pe-1">
+			<a href="<?php echo base_url() ?>/login" class="btn btn-outline-secondary d-block -d-lg-none"><i class="bi bi-person-circle"></i></a>
+		</div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+		
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -44,11 +53,11 @@
                 </ul>
             </li>                  
           </ul>
-          <form class="d-flex">
+          <form class="d-none d-lg-flex me-2">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>
           </form>
-          <a class="nav-link text-white" href="<?php echo base_url() ?>/login">Login</a>
+          <a class="nav-link d-none d-lg-block p-0 text-white" href="<?php echo base_url() ?>/login">Login</a>
         </div>
       </div>
     </nav>
