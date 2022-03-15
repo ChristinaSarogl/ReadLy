@@ -27,7 +27,7 @@
 			</div>
 		<?php else: ?>
 			<div class="nav-item pe-1">
-				<a href="<?php echo base_url() ?>/profile" class="btn btn-outline-secondary d-block d-lg-none"><i class="bi bi-person-circle"></i></i></a>
+				<a href="<?php echo base_url() ?>/profile/<?php echo session()->get('id') ?>" class="btn btn-outline-secondary d-block d-lg-none"><i class="bi bi-person-circle"></i></i></a>
 			</div>
 		<?php endif ?>
 		
@@ -62,7 +62,7 @@
 					</li>
 				<?php else: ?>
 					<li class="nav-item d-none d-lg-flex">
-						<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/profile">Profile</a>
+						<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/profile/<?php echo session()->get('id') ?>">Profile</a>
 					</li>
 				<?php endif ?>
 			</ul>
