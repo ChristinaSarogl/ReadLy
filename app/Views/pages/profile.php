@@ -2,7 +2,7 @@
 	<p class="display-6 pt-3 text-center">Profile</p>
 	<hr>
 	<div class="d-flex flex-column flex-md-row align-items-center mt-3">
-		<img class="rounded-circle p-2" src="books.jpg" width="180px" height="180px">
+		<img class="rounded-circle p-2 img-fluid" src="books.jpg" width="180px">
 		<table class="table table-sm mx-3">
 			<tbody>
 				<tr>

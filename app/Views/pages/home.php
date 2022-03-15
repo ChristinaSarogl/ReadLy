@@ -19,7 +19,7 @@
 										src="<?=base_url('covers')?>/<?php print_r($covers[$index]['file_name'])?>" width="140px">
 									<figcaption class="figure-caption"><?= esc($books_item['title']) ?></figcaption>
 								  </figure>
-								</div>
+								</a>
 							
 								<?php $index++; ?>
 							<?php endforeach ?>

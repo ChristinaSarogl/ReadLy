@@ -2,7 +2,7 @@
     <div class="container">
 		<?php if ((!empty($books) && is_array($books)) && (!empty($covers) && is_array($covers))): ?>
 			<div class="d-flex justify-content-center">
-				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest in Adventure</p>
+				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest in <?= esc($books[0]['category']) ?></p>
 			</div>
 				
 			<div class="row mx-0">
