@@ -11,12 +11,12 @@
         crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> 
 
-    <title>ReadLy</title>
+    <title>BookHood</title>
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark px-1">
       <div class="container-fluid d-flex">
-        <a class="navbar-brand" href="#">ReadLy</a>
+        <a class="navbar-brand" href="#">BookHood</a>
 		
 		<div class="nav-item pe-1 ms-auto">
 			<button type="button" class="btn btn-outline-light d-block d-lg-none"><i class="bi bi-search"></i></button>

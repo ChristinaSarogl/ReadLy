@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'https://mi-linux.wlv.ac.uk/~1801448/readly/public/';
+    public $baseURL = 'https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/';
 
     /**
      * --------------------------------------------------------------------------
