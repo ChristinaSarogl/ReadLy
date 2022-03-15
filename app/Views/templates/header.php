@@ -13,7 +13,7 @@
     <title>ReadLy</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-1">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark px-1">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">ReadLy</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-expanded="false" aria-label="Toggle navigation">

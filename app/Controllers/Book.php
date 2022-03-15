@@ -54,9 +54,10 @@ class Book extends BaseController
 		$modelCovers = model(CoversModel::class);
 		
 		$data['book'] = $modelBooks->getBook($id);
-		$coverID = $data['book']['cover'];
+		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
 		
-		$data['cover'] = $modelCovers->getCover($coverID);
+		$data['similarBooks'] = $modelBooks->getSimilar($id,$data['book']['category']);
+		$data['similarCovers'] = $modelCovers->getSimilar($id,$data['book']['category']);
 		
 		echo view('templates/header');
 		echo view('pages/bookInfo', $data);

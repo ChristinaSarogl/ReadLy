@@ -46,9 +46,25 @@
 		<div class="col-12 col-md-4 col-lg-3 order-4 order-sm-4">
 			<div class="card">
 				<div class="card-body">
-					<p class="fs-5 fw-bold">You might also like</p>
+					<p class="fs-5 fw-bold">Recently added in <?= esc($book['category']) ?></p>
 
 					<div class="row">
+					<?php if ((!empty($similarBooks) && is_array($similarBooks)) && (!empty($similarCovers) && is_array($similarCovers))): ?>
+						<?php $index = 0; ?>
+						<?php foreach ($similarBooks as $books_item): ?>
+							<a class="col-6 col-md-12 col-xl-6 py-2 px-1"
+								href="<?php echo base_url() ?>/book/<?= esc($books_item['id'], 'url') ?>/<?= esc($books_item['slug'], 'url') ?>">
+								<figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
+									<img class="align-middle h-auto cover border-0 img-fluid"
+										src="<?=base_url('covers')?>/<?php print_r($similarCovers[$index]['file_name'])?>" width="120px">
+									<figcaption class="figure-caption"><?= esc($books_item['title']) ?></figcaption>
+								</figure>
+							</a>
+							<?php $index++; ?>
+						<?php endforeach ?>
+					<?php else: ?>
+						<p>Unable to find similar books for you.</p>
+					<?php endif ?>
 					</div>
 				</div>
 			</div>
