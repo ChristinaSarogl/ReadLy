@@ -29,7 +29,10 @@
 			<hr>
 			<p class="mb-1">Publisher: <?= esc($book['publisher']) ?></p>
 			<p class="mb-1">Release Date: <?= esc($book['release_date']) ?></p>
-			<p class="mb-1">Category: <?= esc($book['category']) ?></p>
+			<a class="mb-1 link-dark"
+				href="<?php echo base_url() ?>/browse/<?= esc($book['category'], 'url') ?>">
+				Category: <?= esc($book['category']) ?>
+			</a>
 		</div>
 	</div>
 	
