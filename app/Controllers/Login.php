@@ -6,9 +6,39 @@ class Login extends BaseController
 {
     public function login()
     {
-        echo view('templates/header');
-		echo view('pages/login');
-		echo view('templates/footer');
+		$modelUsers = model(UsersModel::class);
+		$session = session();
+		
+		if ($this->request->getMethod() === 'post' && $this->validate([
+			'email' => 'required|valid_email|',
+			'password' => 'required|max_length[100]'
+		])){
+			$email = $this->request->getVar('email');
+			$password = $this->request->getVar('password');
+			
+			$info = $modelUsers->where(['email' => $email])->first();
+			if($info){
+				if(password_verify($password,$info['password'])){
+					$ses_data = [ 'id' => $info['id'], 'username' => $info['username'],
+						'email' => $info['email'], 'joined' => $info['created_at'],
+						'isLoggedIn' => TRUE ];
+					$session->set($ses_data);
+					return redirect()->to('/profile');
+				} else {
+					$session->setFlashdata('msg', 'Password is incorrect.');
+					return redirect()->to('/login'); 
+				}
+				
+			} else {
+				$session->setFlashdata('msg', 'Email does not exist.');
+				return redirect()->to('/login'); 
+			} 
+				
+		} else {
+			echo view('templates/header');
+			echo view('pages/login');
+			echo view('templates/footer');
+		}
     }
 	
 	public function register()

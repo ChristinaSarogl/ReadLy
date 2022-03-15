@@ -3,7 +3,7 @@
 	<div class="d-sm-none">
 		<p class="fw-bold fs-4 mb-3 text-uppercase text-center">Register</p>
 		
-		<div class="text-white">
+		<div>
 			<?= service('validation')->listErrors() ?>
 		</div>
 

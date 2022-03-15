@@ -2,22 +2,28 @@
 	<!-- Mobile form -->
 	<div class="d-sm-none">
 		<p class="fw-bold fs-4 mb-3 text-uppercase text-center">Login</p>
-		<p class="mb-3 text-secondary text-center" id="error-message">Please enter your login and password!</p>
-		<form class="text-start" id="login-form">
+		
+		<div class="mb-3">
+		   <?= session()->getFlashdata('msg') ?>
+		</div>
+		
+		<form action="<?php echo base_url()?>/login" method="post" class="text-start">
+			<?= csrf_field() ?>
+			
 			<div class="form-floating mb-3 mx-3">
-				<input type="email" class="form-control" id="login-email" placeholder="name@example.com" required>
-				<label for="login-email">Email address</label>
+				<input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+				<label for="email">Email address</label>
 			</div>
 			
 			<div class="form-floating mb-2 mx-3">
-				<input type="password" class="form-control" id="login-password" placeholder="Password" required>
-				<label for="login-password">Password</label>
+				<input type="password" class="form-control" name="password" placeholder="Password" required>
+				<label for="password">Password</label>
 			</div>
 
 			<p class="small mb-3 px-3 pb-lg-2 text-end"><a class="text-secondary" href="#!">Forgot password?</a></p>
 
 			<div class="mt-4 text-center">
-				<button class="btn btn-outline-dark w-50">Login</button>
+				<button type="submit" class="btn btn-outline-dark w-50">Login</button>
 			</div>
 			  
 		</form>
@@ -35,23 +41,28 @@
             <div class="card bg-dark" style="border-radius: 1rem;">
 				<div class="card-body px-5 py-2 text-center">
 					<p class="fw-bold fs-4 mb-3 text-uppercase text-white">Login</p>
-					<p class="mb-3 text-secondary" id="error-message">Please enter your login and password!</p>
+					
+					<div class="mb-3 text-white">
+					   <?= session()->getFlashdata('msg') ?>
+					</div>
 
-					<form class="text-start" id="login-form">
+					<form action="<?php echo base_url()?>/login" method="post" class="text-start">
+						<?= csrf_field() ?>
+						
 						<div class="form-floating mb-3 mx-3">
-							<input type="email" class="form-control" id="login-email" placeholder="name@example.com" required>
-							<label for="login-email">Email address</label>
+							<input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+							<label for="email">Email address</label>
 						</div>
 						
 						<div class="form-floating mb-2 mx-3">
-							<input type="password" class="form-control" id="login-password" placeholder="Password" required>
-							<label for="login-password">Password</label>
+							<input type="password" class="form-control" name="password" placeholder="Password" required>
+							<label for="password">Password</label>
 						</div>
 
 						<p class="small mb-3 px-3 pb-lg-2 text-end"><a class="text-secondary" href="#!">Forgot password?</a></p>
 
 						<div class="mt-4 text-center">
-							<button class="btn btn-outline-light w-50">Login</button>
+							<button type="submit" class="btn btn-outline-light w-50">Login</button>
 						</div>
                           
 					</form>

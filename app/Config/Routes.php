@@ -33,8 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->match(['get', 'post'], '/add_book', 'Book::addBook');
 $routes->match(['get', 'post'], '/register', 'Login::register');
+$routes->match(['get', 'post'], '/login', 'Login::login');
 $routes->get('/home', 'Home::home');
-$routes->get('/login', 'Login::login');
 $routes->get('/profile', 'Home::profile');
 $routes->get('/book/(:segment)/(:segment)', 'Book::view/$1/$2');
 $routes->get('/browse/(:segment)', 'Home::category/$1');
