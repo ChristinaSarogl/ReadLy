@@ -7,15 +7,15 @@
 			<tbody>
 				<tr>
 					<th>Username:</th>
-					<td>name</td>
+					<td><?= esc($username) ?></td>
 				</tr>
 				<tr>
 					<th>Email:</th>
-					<td>test@test.com</td>
+					<td><?= esc($email) ?></td>
 				</tr>
 				<tr>
 					<th>Joined:</th>
-					<td>20/12/1999</td>
+					<td><?= esc($joined) ?></td>
 				</tr>
 				<tr>
 					<th>Reviews:</th>

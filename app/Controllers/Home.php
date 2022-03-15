@@ -22,8 +22,15 @@ class Home extends BaseController
 	
 	public function profile()
     {
+		$session = session();
+		$data = [
+			'username' => $session->get('username'),
+			'email' => $session->get('email'),
+			'joined' => $session->get('joined'),
+		];
+		
         echo view('templates/header');
-		echo view('pages/profile');
+		echo view('pages/profile',$data);
 		echo view('templates/footer');
     }
 	
