@@ -22,7 +22,7 @@
 			<button type="button" class="btn btn-outline-light d-block d-lg-none"><i class="bi bi-search"></i></button>
 		</div>
 		<div class="nav-item pe-1">
-			<a href="<?php echo base_url() ?>/login" class="btn btn-outline-secondary d-block -d-lg-none"><i class="bi bi-person-circle"></i></a>
+			<a href="<?php echo base_url() ?>/login" class="btn btn-outline-secondary d-block d-lg-none"><i class="bi bi-person-circle"></i></a>
 		</div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
