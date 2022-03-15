@@ -12,26 +12,25 @@
 					<?= csrf_field() ?>
 					
                     <div class="row g-3 mb-3">
-                       <div class="col-md-6">
-                            <input type="text" id="add-book-title" name="title" class="form-control"
-                                placeholder="Book title" required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" id="add-book-author" name="author" class="form-control"
-                                placeholder="Author" required>
-                        </div> 
+						<div class="form-floating col-md-6">
+							<input type="text" class="form-control" id="add-book-title" name="title" placeholder="Book title" required>
+							<label for="add-book-title">Book title</label>
+						</div> 
+						<div class="form-floating col-md-6">
+							<input type="text" class="form-control" id="add-book-author" name="author" placeholder="Joe Doe" required>
+							<label for="add-book-author">Author</label>
+						</div> 
                     </div>
-                    
-                    
+					
                     <div class="mb-3">
                         <label for="add-book-summary" class="form-label">Summary</label>
                         <textarea class="form-control" id="add-book-summary" name="summary" rows="6"></textarea>
                     </div>
-                    
-                    <div class="mb-3">
-                        <input type="text" id="add-book-publisher" name="publisher" class="form-control"
-                            placeholder="Publisher" required>
-                    </div>
+					
+					<div class="form-floating mb-3">
+						<input type="text" id="add-book-publisher" name="publisher" class="form-control" placeholder="Penguin" required>
+						<label for="add-book-publisher">Publisher</label>
+					</div> 
 
                     <div class="mb-3">
                         <span class="text-small">Release Date</span>
