@@ -40,16 +40,16 @@
 	<div class="d-none d-md-inline">
 		<ul class="nav nav-tabs mx-5 mt-4">
 			<li class="nav-item">
-			  <button class="nav-link active" >Want to Read</button>
+			  <button class="nav-link active">Want to Read</button>
 			</li>
 			<li class="nav-item">
-				<button class="nav-link link-dark" >Reading</button>
+				<button class="nav-link link-dark">Reading</button>
 			</li>
 			<li class="nav-item">
-				<button class="nav-link link-dark" >Completed</button>
+				<button class="nav-link link-dark">Completed</button>
 			</li>
 			<li class="nav-item">
-				<button class="nav-link link-dark" id="prof-reviews" onclick="getData(4,<?php echo session()->get('id') ?>)">My Reviews</button>
+				<button class="nav-link link-dark" id="prof-reviews-link" onclick="setActive(4,<?php echo session()->get('id') ?>)">My Reviews</button>
 			</li>
 		</ul>
 	</div>
@@ -59,12 +59,12 @@
 		<div class="row">
 			<div class="dropdown text-end my-2">
 				<button class="btn btn-outline-dark dropdown-toggle" type="button" id="listMenuButton"
-					data-bs-toggle="dropdown" aria-expanded="false">Want to Read</button>
+					data-bs-toggle="dropdown" aria-expanded="false"></button>
 				<div class="dropdown-menu" aria-labelledby="listMenuButton">
 					<a class="dropdown-item active">Want to  Read</a>
 					<a class="dropdown-item">Reading</a>
 					<a class="dropdown-item">Completed</a>
-					<a class="dropdown-item">My Reviews</a>
+					<button class="dropdown-item" id="prof-reviews-btn" onclick="setActive(4,<?php echo session()->get('id') ?>)">My Reviews</button>
 				</div>
 			</div>
 		</div>
@@ -82,7 +82,6 @@
 	function getData(category,id){
 		var resultDiv = document.getElementById('ajax-results');
 		if(resultDiv != null){
-			setActive(category);
 			// Fetch data
 			fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/get/' + category + '/' + id)
 			.then(response => response.json())
@@ -166,26 +165,29 @@
 				// Display errors in console
 				console.log(err);
 			});
-		} else {
-			setActive(0);
-			const results = document.getElementById("ajax-results-true");
-			while (results.firstChild) {
-				results.removeChild(results.lastChild);
-			}
-			results.setAttribute('id','ajax-results');
 		}
 	}
 	
-	function setActive(category){
-		prevActive = document.getElementsByClassName('active');
+	function setActive(category,id){
+		prevActiveLink = document.getElementsByClassName('nav-link active');
 		
-		for(let i = 0; i <= prevActive.length-1; i++){
-			prevActive[i].setAttribute('class', 'nav-link link-dark');
+		for(let i = 0; i <= prevActiveLink.length-1; i++){
+			prevActiveLink[i].setAttribute('class', 'nav-link link-dark');
+		}
+		
+		prevActiveBtn = document.getElementsByClassName('dropdown-item active');
+		
+		for(let i = 0; i <= prevActiveBtn.length-1; i++){
+			prevActiveBtn[i].setAttribute('class', 'dropdown-item');
 		}
 		
 		if(category == 4){			
-			document.getElementById('prof-reviews').setAttribute('class','nav-link active');
+			document.getElementById('prof-reviews-link').setAttribute('class','nav-link active');
+			document.getElementById('prof-reviews-btn').setAttribute('class','dropdown-item active');
 		}
+		
+		getData(category,id);		
 	}
+	
 
 </script>
