@@ -58,13 +58,14 @@ class Book extends BaseController
 		$data['book'] = $modelBooks->getBook($id);
 		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
 		$data['reviews'] = $modelReviews->getReviews($id);
-		
+		$users = array();
 		$index = 0;
 		foreach($data['reviews'] as $review){
 			$user = $modelUsers->getUser($review['user_id']);
 			$users[$index] = $user;
 			$index++;
 		}			
+		
 		$data['users'] = $users;
 		$data['similarBooks'] = $modelBooks->getSimilar($id,$data['book']['category']);
 		$data['similarCovers'] = $modelCovers->getSimilar($id,$data['book']['category']);

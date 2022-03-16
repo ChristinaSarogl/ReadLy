@@ -76,9 +76,14 @@
 						<div class="card mb-2">
 							<div class="card-body">
 								<div class="d-flex flex-row">
-									<div class="px-2">
-										<img class="rounded-circle"
-											src="<?=base_url('profilePics')?>/<?php print_r($users[$revIndex]['profilePic'])?>" width="80px" height="80px">
+									<div class="d-flex flex-column align-items-center px-2">
+										<?php if ($users[$revIndex]['profilePic'] == NULL): ?>
+											<img class="rounded-circle"
+												src="<?=base_url('profilePics')?>/default_profile.jpg" width="80px" height="80px">
+										<?php else: ?>
+											<img class="rounded-circle"
+												src="<?=base_url('profilePics')?>/<?php print_r($users[$revIndex]['profilePic'])?>" width="80px" height="80px">
+										<?php endif ?>
 										<p class="mb-2"><?php print_r($users[$revIndex]['username'])?></p>
 										<p class="m-0">Rating</p>
 									</div>
