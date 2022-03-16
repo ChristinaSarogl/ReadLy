@@ -13,6 +13,7 @@ class User extends BaseController
 			'username' => $user['username'],
 			'email' => $user['email'],
 			'joined' => $user['created_at'],
+			'profileImage' => $user['profilePic'],
 		];
 		
         echo view('templates/header');

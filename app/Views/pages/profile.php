@@ -2,7 +2,11 @@
 	<p class="display-6 pt-3 text-center">Profile</p>
 	<hr>
 	<div class="d-flex flex-column flex-md-row align-items-center mt-3">
-		<img class="rounded-circle p-2 img-fluid" src="books.jpg" width="180px">
+		<?php if($profileImage == NULL): ?>
+			<img class="rounded-circle p-2" src="<?=base_url('profilePics')?>/default_profile.jpg" width="180px" height="180px">
+		<?php else: ?>
+			<img class="rounded-circle p-2" src="<?=base_url('profilePics')?>/<?php print_r($profileImage)?>" width="180px" height="180px">
+		<?php endif ?>
 		<div class="d-flex flex-grow-1">
 			<table class="table table-sm mx-3">
 				<tbody>
