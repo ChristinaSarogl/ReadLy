@@ -47,40 +47,53 @@
 				<?php endif ?>
 			</div>
 			
-			<div id="add-review"></div>
+			<div id="add-review">
+				<div class="card mb-2" id='card-form' style="display:none">
+					<div class="card-body">
+						<form action="<?php echo base_url()?>/save-review/<?= esc($book['id']) ?>" method="post" id="save-review">
+							<?= csrf_field() ?>
+							<div class="mb-1">
+								<label for="title" class="form-label">Title</label>
+								<input type="text" class="form-control" name="title" placeholder="Title" required/>
+								
+								<label for="review" class="form-label">Review</label>
+								<textarea class="form-control" name="review" rows="6" required></textarea>
+								
+								<div class='d-flex justify-content-end'>
+									<button type="button" class="btn btn-secondary mt-2 me-2" onclick="closeReview()">Cancel</button>
+									<input type="submit" class="btn btn-outline-dark mt-2" value="Post Review" />
+								</div>
+							</div>							
+						</form>
+					</div>
+				</div>
+			</div>
 			
-			<div>			
-				<div class="card mb-2">
-					<div class="card-body">
-						<div class="d-flex flex-row">
-							<div class="px-2">
-								<img class="rounded-circle" src="books.jpg" width="80px" height="80px">
-								<p class="mb-2">Username</p>
-								<p class="m-0">Rating</p>
-							</div>
-							<div class="flex-fill ms-3">
-								<p>Illuminating ... [Nicolson] operates in a tradition pioneered by Annie Dillard and upheld by the likes of David Haskell — closely observing a discrete patch of earth (or sea) and taking it as his muse ... Not that he’s a passive watcher. Nicolson engineers his own pools in a Scottish bay, 'gardening the sea' with crowbars and mortar, then evokes their tiny inhabitants in lovely detail. He’s fascinated by the adaptations that permit life in this 'Darwinian laboratory' ... There’s brutality here, but also brilliance — anemones, despite literal brainlessness, adeptly size up their rivals — and astonishing tenderness ... The notion of dredging big truths from small pools isn’t novel ... But few writers have done it with Nicolson’s discursive erudition. He introduces a litany of scientists who have sought universality in tide pools, these accessible, self-contained aquariums ... Nicolson’s at his best when he’s focused on his precious littoral world. Here, even rocks have stories.</p>
+			<div>	
+				<?php if ((!empty($reviews) && is_array($reviews)) && (!empty($users) && is_array($users))): ?>	
+					<?php $revIndex = 0; ?>
+					<?php foreach ($reviews as $review): ?> 
+						<div class="card mb-2">
+							<div class="card-body">
+								<div class="d-flex flex-row">
+									<div class="px-2">
+										<img class="rounded-circle"
+											src="<?=base_url('profilePics')?>/<?php print_r($users[$revIndex]['profilePic'])?>" width="80px" height="80px">
+										<p class="mb-2"><?php print_r($users[$revIndex]['username'])?></p>
+										<p class="m-0">Rating</p>
+									</div>
+									<div class="flex-fill ms-3">
+										<p class="fw-bold"><?= esc($review['title']) ?></p>
+										<p><?= esc($review['review']) ?></p>
+									</div>
+								</div>
+								<p class="mt-1 mb-0 text-secondary"><?= esc($review['created_at']) ?></p>
 							</div>
 						</div>
-						<p class="m-0 text-secondary">Date</p>
-					</div>
-				</div>
+						<?php $revIndex++; ?>
+					<?php endforeach ?>
+				<?php endif ?>
 				
-				<div class="card mb-2">
-					<div class="card-body">
-						<div class="d-flex flex-row">
-							<div class="px-2">
-								<img class="rounded-circle" src="books.jpg" width="80px" height="80px">
-								<p class="mb-2">Username</p>
-								<p class="m-0">Rating</p>
-							</div>
-							<div class="flex-fill ms-3">
-								<p>Illuminating ... [Nicolson] operates in a tradition pioneered by Annie Dillard and upheld by the likes of David Haskell — closely observing a discrete patch of earth (or sea) and taking it as his muse ... Not that he’s a passive watcher. Nicolson engineers his own pools in a Scottish bay, 'gardening the sea' with crowbars and mortar, then evokes their tiny inhabitants in lovely detail. He’s fascinated by the adaptations that permit life in this 'Darwinian laboratory' ... There’s brutality here, but also brilliance — anemones, despite literal brainlessness, adeptly size up their rivals — and astonishing tenderness ... The notion of dredging big truths from small pools isn’t novel ... But few writers have done it with Nicolson’s discursive erudition. He introduces a litany of scientists who have sought universality in tide pools, these accessible, self-contained aquariums ... Nicolson’s at his best when he’s focused on his precious littoral world. Here, even rocks have stories.</p>
-							</div>
-						</div>
-						<p class="m-0 text-secondary">Date</p>
-					</div>
-				</div>
 			</div>
 			
 		</div>
@@ -116,74 +129,15 @@
 
 <script>
 	function addReview(){
-		reviewsSection = document.getElementById('add-review');
-		formOpen = document.getElementById('form-open');
-		if (formOpen == null){		
-			card = document.createElement('div');
-			card.setAttribute('class','card mb-2');
-			card.setAttribute('id','form-open');
-			
-			cardBody = document.createElement('div');
-			cardBody.setAttribute('class','card-body');
-
-			form = document.createElement('form');
-
-			inputDiv = document.createElement('div');
-			inputDiv.setAttribute('class','mb-3');
-
-			labelTitle = document.createElement('label');
-			labelTitle.setAttribute('class','form-label');
-			labelTitle.innerHTML = "Title";
-
-			title = document.createElement('input');
-			title.setAttribute('class','form-control');
-			title.setAttribute('type','text');
-			title.setAttribute('placeholder','Title');
-
-			labelReview = document.createElement('label');
-			labelReview.setAttribute('class','form-label');
-			labelReview.innerHTML = "Review";
-
-			textareaReview = document.createElement('textarea');
-			textareaReview.setAttribute('class','form-control');
-			textareaReview.setAttribute('rows','7');
-
-			submitDiv = document.createElement('div');
-			submitDiv.setAttribute('class','d-flex justify-content-end');
-
-			submitReview = document.createElement('input');
-			submitReview.setAttribute('class','btn btn-outline-dark mt-2');
-			submitReview.setAttribute('type','submit');
-			submitReview.setAttribute('value','Post Review');
-
-			cancelButton = document.createElement('button');
-			cancelButton.setAttribute('type','button');
-			cancelButton.setAttribute('class','btn btn-secondary mt-2 me-2');
-			cancelButton.setAttribute('onclick','closeReview()');
-			cancelButton.innerHTML = "Cancel";
-			 
-			submitDiv.append(cancelButton);
-			submitDiv.append(submitReview);
-
-			inputDiv.append(labelTitle);
-			inputDiv.append(title);
-			inputDiv.append(labelReview);
-			inputDiv.append(textareaReview);
-			inputDiv.append(submitDiv);
-
-			form.append(inputDiv);
-			cardBody.append(form);
-			card.append(cardBody);		
-			reviewsSection.append(card);	
+		formOpen = document.getElementById('card-form').style.display;
+		if (formOpen == "none"){		
+			document.getElementById('card-form').style.display = "block";				
 		} else {
 			closeReview();
 		}
 	}
 
 	function closeReview(){
-		review = document.getElementById("add-review");
-		while (review.firstChild) {
-			review.removeChild(review.lastChild);
-		}
-	}
+		document.getElementById('card-form').style.display = "none";
+	}	
 </script>

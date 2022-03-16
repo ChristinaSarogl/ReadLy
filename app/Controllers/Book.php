@@ -52,10 +52,20 @@ class Book extends BaseController
 	{
 		$modelBooks = model(BooksModel::class);
 		$modelCovers = model(CoversModel::class);
+		$modelReviews = model(ReviewsModel::class);
+		$modelUsers = model(UsersModel::class);
 		
 		$data['book'] = $modelBooks->getBook($id);
 		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
+		$data['reviews'] = $modelReviews->getReviews($id);
 		
+		$index = 0;
+		foreach($data['reviews'] as $review){
+			$user = $modelUsers->getUser($review['user_id']);
+			$users[$index] = $user;
+			$index++;
+		}			
+		$data['users'] = $users;
 		$data['similarBooks'] = $modelBooks->getSimilar($id,$data['book']['category']);
 		$data['similarCovers'] = $modelCovers->getSimilar($id,$data['book']['category']);
 		
@@ -64,4 +74,28 @@ class Book extends BaseController
 		echo view('templates/footer');
 	}
 	
+	
+	public function postReview($bookId)
+	{
+		$modelReviews = model(ReviewsModel::class);
+		$modelBooks = model(BooksModel::class);
+		$session = session();
+		
+		if ($this->request->getMethod() === 'post' && $this->validate([
+			'title' => 'required|max_length[255]',
+			'review' => 'required',			
+		])){
+			$modelReviews->save([
+				'title' => $this->request->getPost('title'),
+				'review' => $this->request->getPost('review'),
+				'created_at' => date('y-m-d'),
+				'book_id' => $bookId,
+				'user_id' => $session->get('id'),
+			]);
+			
+			$book = $modelBooks->getBook($bookId);
+			return redirect()->to('/book/'.$bookId.'/'.$book['slug']);
+			
+		} 
+	}
 }
