@@ -2,7 +2,7 @@
         <div class="row d-flex justify-content-center align-items-center">
             <p class="display-6 pt-3 text-center">Add Book</p>
             <hr>
-            
+            <p class="text-center text-danger fs-5">To start, check that the book is not already present on the site,<br> by using the search bar at the top of the site.</p>
             <div class="col-12 col-md-8 col-xl-7">  
 				
 				<?= service('validation')->listErrors() ?>

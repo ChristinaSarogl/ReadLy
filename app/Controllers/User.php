@@ -7,14 +7,22 @@ class User extends BaseController
 	public function profile($id)
     {
 		$modelUsers = model(UsersModel::class);
+		$modelReviews = model(ReviewsModel::class);
 		
 		$user = $modelUsers->getUser($id);
+		$reviews = $modelReviews->getUserReviews($id);
 		$data = [
 			'username' => $user['username'],
 			'email' => $user['email'],
 			'joined' => $user['created_at'],
 			'profileImage' => $user['profilePic'],
 		];
+		
+		if(!empty($reviews)){
+			$data['reviewCount'] = count($reviews);
+		} else{
+			$data['reviewCount'] = 0;
+		}
 		
         echo view('templates/header');
 		echo view('pages/profile',$data);

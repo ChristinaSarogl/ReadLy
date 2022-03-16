@@ -14,4 +14,9 @@ class ReviewsModel extends Model
 	{
 		return $this->where(['book_id' => $bookId])->findAll();
 	}
+	
+	public function getUserReviews($userID)
+	{
+		return $this->where(['user_id' => $userID])->findAll();
+	}
 }
