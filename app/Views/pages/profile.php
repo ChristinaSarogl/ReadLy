@@ -183,9 +183,9 @@
 		.then(response => {			
 			if(response.result == undefined){	
 				response.forEach(function(book,index) {			
-					bookDiv = document.createElement('div');
+					bookDiv = document.createElement('a');
 					bookDiv.setAttribute('class','col-6 col-sm-4 col-lg-2 py-2 px-1 text-center');
-					
+					bookDiv.setAttribute('href','<?php echo base_url() ?>/book/' + book.book_id + '/' + book.book_slug);
 					bookFigure = document.createElement('figure');
 					bookFigure.setAttribute('class','figure pb-2 mb-1 h-100 d-flex flex-column align-items-center');
 					
