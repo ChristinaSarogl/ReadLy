@@ -65,7 +65,7 @@
 	</div>
 	
 	<div class="mx-md-5 mx-1 pt-2 bg-white">  
-		<div class="row" id='ajax-lists'></div>
+		<div class="row mx-md-2 mx-1" id='ajax-lists'></div>
 		<div class="accordion accordion-flush" id="ajax-reviews"></div>
 	</div>
 	

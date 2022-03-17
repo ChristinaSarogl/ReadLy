@@ -48,7 +48,7 @@ class Book extends BaseController
 		}	
 	}
 	
-	public function view($id=null,$slug=null)
+	public function view($id,$slug)
 	{
 		$modelBooks = model(BooksModel::class);
 		$modelCovers = model(CoversModel::class);
@@ -57,6 +57,7 @@ class Book extends BaseController
 		
 		$data['book'] = $modelBooks->getBook($id);
 		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
+		
 		$data['reviews'] = $modelReviews->getReviews($id);
 		$users = array();
 		$index = 0;
@@ -65,8 +66,8 @@ class Book extends BaseController
 			$users[$index] = $user;
 			$index++;
 		}			
-		
 		$data['users'] = $users;
+		
 		$data['similarBooks'] = $modelBooks->getSimilar($id,$data['book']['category']);
 		$data['similarCovers'] = $modelCovers->getSimilar($id,$data['book']['category']);
 		
@@ -89,7 +90,8 @@ class Book extends BaseController
 			$modelReviews->save([
 				'title' => $this->request->getPost('title'),
 				'review' => $this->request->getPost('review'),
-				'created_at' => date('y-m-d'),
+				'rating' => $this->request->getPost('userRating'),
+				'created_at' => date('y-m-d'),				
 				'book_id' => $bookId,
 				'user_id' => $session->get('id'),
 			]);

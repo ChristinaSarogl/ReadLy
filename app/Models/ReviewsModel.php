@@ -8,7 +8,7 @@ class ReviewsModel extends Model
 {
     protected $table = 'reviews';
 	
-	protected $allowedFields = ['title','review','created_at','book_id','user_id'];
+	protected $allowedFields = ['title','review','rating','created_at','book_id','user_id'];
 	
 	public function getReviews($bookId)
 	{

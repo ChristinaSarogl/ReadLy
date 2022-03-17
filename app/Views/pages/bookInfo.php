@@ -72,7 +72,18 @@
 					<div class="card-body">
 						<form action="<?php echo base_url()?>/save-review/<?= esc($book['id']) ?>" method="post" id="save-review">
 							<?= csrf_field() ?>
-							<div class="mb-1">
+							<div class="mb-1">	
+								<div class="d-flex flex-row align-items-center mb-3">
+									<p class="mb-2 me-3">Rating</p>	
+									<select class="form-select" name="userRating">
+										<option value=1>1 star</option>
+										<option value=2>2 stars</option>
+										<option value=3>3 stars</option>
+										<option value=4>4 stars</option>
+										<option value=5>5 stars</option>
+									</select>
+								</div>
+								
 								<label for="title" class="form-label">Title</label>
 								<input type="text" class="form-control" name="title" placeholder="Title" required/>
 								
