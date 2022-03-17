@@ -1,8 +1,25 @@
 <div class="container" style="background: #ebebeb;">
 	<div class="row">
 		<div class="col-12 col-md-4 col-lg-3 order-1 order-sm-1">
-			<div class="d-flex justify-content-center mt-3">
+			<div class="d-flex flex-column align-items-center mt-3">
 				<img src="<?=base_url('covers')?>/<?php print_r($cover['file_name'])?>" class="img-fluid" width="220px">
+				
+				<div class="text-center mt-3">
+					<?php if ($rating !== "none"): ?>
+						<?php for ($x = 0; $x < $rating; $x++): ?>
+							<i class="fa fa-star checked text-warning" style="font-size:25px"></i>
+						<?php endfor; ?>	
+						<?php for ($x = 0; $x < ($rating-5); $x++): ?>
+							<i class="fa fa-star-o checked text-secondary" style="font-size:25px"></i>
+						<?php endfor; ?>
+						<p class="mt-2"><?= esc($rating) ?> stars based on <?php echo count($reviews) ?> reviews.</p>
+					<?php else: ?>
+						<?php for ($x = 0; $x < 5; $x++): ?>
+							<i class="fa fa-star-o checked text-secondary" style="font-size:25px"></i>
+						<?php endfor; ?>
+						<p class="mt-2">0 stars based on 0 reviews.</p>
+					<?php endif; ?>
+				</div>
 			</div>              
 		</div>
 		
@@ -41,9 +58,8 @@
 				<?php endif ?>
 				
 			</div>
-			<p>Rating</p>
 
-			<p class="text-uppercase fst-italic">Summary</p>
+			<p class="text-uppercase fst-italic mt-3 mb-2">Summary</p>
 			<p><?= esc($book['summary']) ?></p>
 			
 			<hr>
@@ -116,7 +132,14 @@
 												src="<?=base_url('profilePics')?>/<?php print_r($users[$revIndex]['profilePic'])?>" width="80px" height="80px">
 										<?php endif ?>
 										<p class="mb-2"><?php print_r($users[$revIndex]['username'])?></p>
-										<p class="m-0">Rating</p>
+										<p class="m-0">
+											<?php for ($x = 0; $x < $review['rating']; $x++): ?>
+												<i class="fa fa-star checked text-warning" style="font-size:13px"></i>
+											<?php endfor; ?>	
+											<?php for ($x = 0; $x < ($review['rating']-5); $x++): ?>
+												<i class="fa fa-star-o checked text-warning" style="font-size:13px"></i>
+											<?php endfor; ?>
+										</p>
 									</div>
 									<div class="flex-fill ms-3">
 										<p class="fw-bold"><?= esc($review['title']) ?></p>

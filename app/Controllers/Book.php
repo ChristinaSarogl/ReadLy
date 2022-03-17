@@ -58,15 +58,25 @@ class Book extends BaseController
 		$data['book'] = $modelBooks->getBook($id);
 		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
 		
-		$data['reviews'] = $modelReviews->getReviews($id);
-		$users = array();
-		$index = 0;
-		foreach($data['reviews'] as $review){
-			$user = $modelUsers->getUser($review['user_id']);
-			$users[$index] = $user;
-			$index++;
-		}			
-		$data['users'] = $users;
+		$reviews = $modelReviews->getReviews($id);
+		if (!empty($reviews)){
+			$data['reviews'] = $reviews;
+			$totalRat = 0;
+			$users = array();
+			$index = 0;
+			foreach($reviews as $review){
+				$user = $modelUsers->getUser($review['user_id']);
+				$users[$index] = $user;
+				$totalRat = $totalRat + $review['rating'];
+				$index++;
+			}
+			$data['users'] = $users;
+			$data['rating'] = ($totalRat/count($reviews));			
+		} else {
+			$data['reviews'] = array();
+			$data['users'] = array();
+			$data['rating'] = "none";
+		}
 		
 		$data['similarBooks'] = $modelBooks->getSimilar($id,$data['book']['category']);
 		$data['similarCovers'] = $modelCovers->getSimilar($id,$data['book']['category']);
