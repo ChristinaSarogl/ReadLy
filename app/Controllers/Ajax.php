@@ -6,7 +6,7 @@ use App\Models\NewsModel;
 
 class Ajax extends BaseController
 {
-	public function get($category,$userID)
+	public function getLists($category,$userID)
 	{
 		if ($category == 4){
 			$modelReviews = model(ReviewsModel::class);
@@ -14,23 +14,57 @@ class Ajax extends BaseController
 			
 			$reviews = $modelReviews->getUserReviews($userID);
 			
-			$passdata = array();
-			$index = 0;
-			foreach($reviews as $review){
-				$bookInfo = $modelBooks->getBook($review['book_id']);
-				$passdata[$index] = [
-					'created_at' => $review['created_at'],
-					'review' => $review['review'],
-					'title' => $review['title'],
-					'book_id' => $review['book_id'],
-					'book_title' => $bookInfo['title'],
-					'book_slug' => $bookInfo['slug'],
-				];
-				$index++;
+			if(empty($reviews)){
+				$passdata['result'] = 'none';
+			} else {
+				$passdata = array();
+				$index = 0;
+				foreach($reviews as $review){
+					$bookInfo = $modelBooks->getBook($review['book_id']);
+					$passdata[$index] = [
+						'created_at' => $review['created_at'],
+						'review' => $review['review'],
+						'title' => $review['title'],
+						'book_id' => $review['book_id'],
+						'book_title' => $bookInfo['title'],
+						'book_slug' => $bookInfo['slug'],
+					];
+					$index++;
+				}
 			}
 			
-			print(json_encode($passdata));
-		}		
+		} else{
+			if ($category == 1){
+				$model = model(ToReadModel::class);
+			} elseif ($category == 2){
+				$model = model(ReadingModel::class);
+			} elseif ($category == 3){
+				$model = model(CompleteModel::class);
+			}
+			
+			$modelBook = model(BooksModel::class);
+			$modelCover = model(CoversModel::class);
+			
+			$books = $model->getList($userID);
+			if (empty($books)){
+				$passdata['result'] = 'none';
+			} else {	
+				$index = 0;
+				foreach($books as $bookEntry){
+					$book = $modelBook->getBook($bookEntry['book_id']);
+					$cover = $modelCover->getCover($book['cover']);
+					$passdata[$index] = [
+						'book_id' => $book['id'],
+						'book_slug' => $book['slug'],
+						'book_title' => $book['title'],
+						'book_cover' => $cover['file_name'],
+					];
+					$index++;
+				}	
+			}
+		}
+
+		print(json_encode($passdata));
 	}
 	
 	public function updateList($bookId,$list,$userId)
@@ -61,7 +95,7 @@ class Ajax extends BaseController
 			
 			$passdata['list'] = 'Want to Read';	
 			
-		} else if ($list == 2){
+		} elseif ($list == 2){
 			$modelReading  = model(ReadingModel::class);
 			$books = $modelReading->getList($userId);
 			
@@ -87,7 +121,7 @@ class Ajax extends BaseController
 			
 			$passdata['list'] = 'Reading';
 			
-		} else if ($list == 3){
+		} elseif ($list == 3){
 			$modelComplete  = model(CompleteModel::class);
 			$books = $modelComplete->getList($userId);
 			
@@ -117,7 +151,7 @@ class Ajax extends BaseController
 		print(json_encode($passdata));	
 	}
 	
-	public function getLists($userId,$bookId)
+	public function getBookInLists($userId,$bookId)
 	{
 		$modelRead = model(ToReadModel::class);
 		$modelReading = model(ReadingModel::class);

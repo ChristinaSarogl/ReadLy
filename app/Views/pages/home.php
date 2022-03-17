@@ -3,7 +3,7 @@
 		<?php if ((!empty($books) && is_array($books)) && (!empty($covers) && is_array($covers))): ?>
 		
 			<div class="d-flex justify-content-center">
-				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest realises</p>
+				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest additions</p>
 			</div> 
 			
 			<div id="latestReleases" class="carousel slide" data-wrap="false" data-bs-interval="false">

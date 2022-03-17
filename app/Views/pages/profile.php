@@ -40,13 +40,13 @@
 	<div class="d-none d-md-inline">
 		<ul class="nav nav-tabs mx-5 mt-4">
 			<li class="nav-item">
-			  <button class="nav-link active">Want to Read</button>
+			  <button class="nav-link active" id="prof-want-link" onclick="setActive(1)">Want to Read</button>
 			</li>
 			<li class="nav-item">
-				<button class="nav-link link-dark">Reading</button>
+				<button class="nav-link link-dark" id="prof-read-link" onclick="setActive(2)">Reading</button>
 			</li>
 			<li class="nav-item">
-				<button class="nav-link link-dark">Completed</button>
+				<button class="nav-link link-dark" id="prof-complete-link" onclick="setActive(3)">Completed</button>
 			</li>
 			<li class="nav-item">
 				<button class="nav-link link-dark" id="prof-reviews-link" onclick="setActive(4)">My Reviews</button>
@@ -65,99 +65,108 @@
 	</div>
 	
 	<div class="row mx-md-5 mx-1 pt-2 bg-white">  
-		<div class="accordion accordion-flush" id="ajax-results">
-		
-		</div>
+		<div id='ajax-lists'></div>
+		<div class="accordion accordion-flush" id="ajax-reviews"></div>
 	</div>
 	
 </div>
 
 <script>
-	function getData(category,id){
-		var resultDiv = document.getElementById('ajax-results');
+	function getReviews(userId){
+		var resultDiv = document.getElementById('ajax-reviews');
 		if(resultDiv != null){
 			// Fetch data
-			fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/get/' + category + '/' + id)
+			fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/getlists/4/' + userId)
 			.then(response => response.json())
-			.then(response => {				
-				response.forEach(function(review,index){
-					item = document.createElement('div');
-					item.setAttribute('class','accordion-item');
+			.then(response => {		
+				if (response.result == undefined){
+					response.forEach(function(review,index){
+						item = document.createElement('div');
+						item.setAttribute('class','accordion-item');
+						
+						header = document.createElement('h2');
+						header.setAttribute('class','accordion-header');
+						header.setAttribute('id','header-' + review.book_slug);
+						
+						headerBtn = document.createElement('button');
+						headerBtn.setAttribute('class','accordion-button collapsed');
+						headerBtn.setAttribute('type','button');
+						headerBtn.setAttribute('data-bs-toggle','collapse');
+						headerBtn.setAttribute('data-bs-target','#info-' + review.book_slug);
+						headerBtn.setAttribute('aria-expanded','false');
+						headerBtn.setAttribute('aria-controls','info-' + review.book_slug);
+						
+						btnTitleDiv = document.createElement('div');
+						btnTitleDiv.setAttribute('class','d-flex justify-content-between w-100 me-3');
+						
+						title = document.createElement('p');
+						title.setAttribute('class','m-0');
+						title.innerHTML = review.book_title;
+						
+						date = document.createElement('p');
+						date.setAttribute('class','m-0 text-small text-secondary');
+						date.innerHTML = review.created_at;
+						
+						infoDiv = document.createElement('div');
+						infoDiv.setAttribute('id','info-' + review.book_slug);
+						infoDiv.setAttribute('class','accordion-collapse collapse');
+						infoDiv.setAttribute('aria-labelledby','header-' + review.book_slug);
+						infoDiv.setAttribute('data-bs-parent','#ajax-results-true');
+						
+						
+						infoBody = document.createElement('div');
+						infoBody.setAttribute('class','accordion-body py-2');
+						
+						reviewTitle = document.createElement('p');
+						reviewTitle.setAttribute('class','fw-bold');
+						reviewTitle.innerHTML = review.title;
+						
+						reviewBody = document.createElement('p');
+						reviewBody.innerHTML = review.review;
+						
+						
+						buttonDiv = document.createElement('div');
+						buttonDiv.setAttribute('class','d-flex flex-row justify-content-end');
+						
+						linkBook = document.createElement('p');
+						linkBook.innerHTML = "Go to book";
+						
+						deleteButton = document.createElement('p');
+						deleteButton.setAttribute('class','btn btn-outline-danger mb-1');
+						deleteButton.innerHTML = '<i class="bi bi-trash3"></i>';
+						
+						editButton = document.createElement('p');
+						editButton.setAttribute('class','btn btn-outline-secondary me-2 mb-1');
+						editButton.innerHTML = '<i class="bi bi-pencil-square"></i>';
+						
+						btnTitleDiv.append(title);
+						btnTitleDiv.append(date);
+						headerBtn.append(btnTitleDiv);
+						header.append(headerBtn);
+						
+						infoBody.append(reviewTitle);
+						infoBody.append(reviewBody);
+						buttonDiv.append(linkBook)
+						buttonDiv.append(editButton);
+						buttonDiv.append(deleteButton);		
+						infoBody.append(buttonDiv);
+						infoDiv.append(infoBody);
+						
+						item.append(header);
+						item.append(infoDiv);
+						resultDiv.append(item);
+					});	
 					
-					header = document.createElement('h2');
-					header.setAttribute('class','accordion-header');
-					header.setAttribute('id','header-' + review.book_slug);
+					resultDiv.setAttribute('id','ajax-reviews-true');
+				} else {
+					listsDiv = document.getElementById('ajax-lists');
 					
-					headerBtn = document.createElement('button');
-					headerBtn.setAttribute('class','accordion-button collapsed');
-					headerBtn.setAttribute('type','button');
-					headerBtn.setAttribute('data-bs-toggle','collapse');
-					headerBtn.setAttribute('data-bs-target','#info-' + review.book_slug);
-					headerBtn.setAttribute('aria-expanded','false');
-					headerBtn.setAttribute('aria-controls','info-' + review.book_slug);
+					message = document.createElement('p');
+					message.setAttribute('class','mb-2');
+					message.innerHTML = "You  haven't written any reviews yet.";
 					
-					btnTitleDiv = document.createElement('div');
-					btnTitleDiv.setAttribute('class','d-flex justify-content-between w-100 me-3');
-					
-					title = document.createElement('p');
-					title.setAttribute('class','m-0');
-					title.innerHTML = review.book_title;
-					
-					date = document.createElement('p');
-					date.setAttribute('class','m-0 text-small text-secondary');
-					date.innerHTML = review.created_at;
-					
-					infoDiv = document.createElement('div');
-					infoDiv.setAttribute('id','info-' + review.book_slug);
-					infoDiv.setAttribute('class','accordion-collapse collapse');
-					infoDiv.setAttribute('aria-labelledby','header-' + review.book_slug);
-					infoDiv.setAttribute('data-bs-parent','#ajax-results-true');
-					
-					
-					infoBody = document.createElement('div');
-					infoBody.setAttribute('class','accordion-body py-2');
-					
-					reviewTitle = document.createElement('p');
-					reviewTitle.setAttribute('class','fw-bold');
-					reviewTitle.innerHTML = review.title;
-					
-					reviewBody = document.createElement('p');
-					reviewBody.innerHTML = review.review;
-					
-					
-					buttonDiv = document.createElement('div');
-					buttonDiv.setAttribute('class','d-flex flex-row justify-content-end');
-					
-					linkBook = document.createElement('p');
-					linkBook.innerHTML = "Go to book";
-					
-					deleteButton = document.createElement('p');
-					deleteButton.setAttribute('class','btn btn-outline-danger mb-1');
-					deleteButton.innerHTML = '<i class="bi bi-trash3"></i>';
-					
-					editButton = document.createElement('p');
-					editButton.setAttribute('class','btn btn-outline-secondary me-2 mb-1');
-					editButton.innerHTML = '<i class="bi bi-pencil-square"></i>';
-				});
-				
-				btnTitleDiv.append(title);
-				btnTitleDiv.append(date);
-				headerBtn.append(btnTitleDiv);
-				header.append(headerBtn);
-				
-				infoBody.append(reviewTitle);
-				infoBody.append(reviewBody);
-				buttonDiv.append(linkBook)
-				buttonDiv.append(editButton);
-				buttonDiv.append(deleteButton);		
-				infoBody.append(buttonDiv);
-				infoDiv.append(infoBody);
-				
-				item.append(header);
-				item.append(infoDiv);
-				resultDiv.append(item);
-				
-				resultDiv.setAttribute('id','ajax-results-true');
+					listsDiv.append(message);
+				}
 			})
 			.catch(err => {
 				// Display errors in console
@@ -166,7 +175,62 @@
 		}
 	}
 	
+	function getList(list,userId){
+		var resultDiv = document.getElementById('ajax-lists');
+		
+		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/getlists/' + list + '/' + userId)
+		.then(response => response.json())
+		.then(response => {			
+			if(response.result == undefined){	
+				response.forEach(function(book,index) {			
+					bookDiv = document.createElement('div');
+					bookDiv.setAttribute('class','col-6 col-sm-4 col-lg-2 py-2 px-1 text-center');
+					
+					bookFigure = document.createElement('figure');
+					bookFigure.setAttribute('class','figure pb-2 mb-1 h-100 d-flex flex-column align-items-center');
+					
+					cover = document.createElement('img');
+					cover.setAttribute('class','align-middle h-auto cover border-0 img-fluid');
+					cover.setAttribute('src',"<?=base_url('covers')?>/" + book.book_cover);
+					cover.setAttribute('width','140px');
+					
+					caption = document.createElement('figcaption');
+					caption.setAttribute('class','figure-caption');
+					caption.innerHTML = book.book_title;
+					
+					bookFigure.append(cover);
+					bookFigure.append(caption);
+					bookDiv.append(bookFigure);
+					resultDiv.append(bookDiv);
+				});
+			} else {
+				message = document.createElement('p');
+				message.setAttribute('class','mb-2');
+				message.innerHTML = "You  haven't added any books yet.";
+				
+				resultDiv.append(message);
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+	
 	function setActive(category){
+		//Clear space
+		listsDiv = document.getElementById("ajax-lists");
+		while (listsDiv.firstChild) {
+			listsDiv.removeChild(listsDiv.lastChild);
+		}
+		
+		revDiv = document.getElementById("ajax-reviews-true");
+		if(revDiv != null){
+			while (revDiv.firstChild) {
+				revDiv.removeChild(revDiv.lastChild);
+			}
+		}
+		
+		
 		prevActiveLink = document.getElementsByClassName('nav-link active');
 		
 		for(let i = 0; i <= prevActiveLink.length-1; i++){
@@ -175,9 +239,18 @@
 		
 		if(category == 4){			
 			document.getElementById('prof-reviews-link').setAttribute('class','nav-link active');
-		}
-		
-		getData(category,<?php echo session()->get('id') ?>);		
+			getReviews(<?php echo session()->get('id') ?>);
+			
+		} else if(category == 1){
+			document.getElementById('prof-want-link').setAttribute('class','nav-link active');
+			getList(category,<?php echo session()->get('id') ?>);
+		} else if (category == 2){
+			document.getElementById('prof-read-link').setAttribute('class','nav-link active');
+			getList(category,<?php echo session()->get('id') ?>);
+		} else if (category == 3){
+			document.getElementById('prof-complete-link').setAttribute('class','nav-link active');
+			getList(category,<?php echo session()->get('id') ?>);
+		}		
 	}
 	
 	document.getElementById("mobileSelect").onchange = changeListener;  
@@ -185,5 +258,8 @@
 		setActive(this.value);
 	}
 	
+	$(document).ready(function() {
+		setActive(1);
+	});
 
 </script>

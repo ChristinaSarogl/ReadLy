@@ -42,9 +42,9 @@ $routes->get('/browse/(:segment)', 'Home::category/$1');
 $routes->get('/logout', 'Login::logout');
 $routes->post('save-review/(:segment)','Book::postReview/$1');
 
-$routes->get('/ajax/get/(:segment)/(:segment)', 'Ajax::get/$1/$2');
-$routes->get('/ajax/updatelist/(:segment)/(:segment)/(:segment)', 'Ajax::updateList/$1/$2/$3');
 $routes->get('/ajax/getlists/(:segment)/(:segment)', 'Ajax::getLists/$1/$2');
+$routes->get('/ajax/updatelist/(:segment)/(:segment)/(:segment)', 'Ajax::updateList/$1/$2/$3');
+$routes->get('/ajax/bookinlists/(:segment)/(:segment)', 'Ajax::getBookInLists/$1/$2');
 
 
 /*

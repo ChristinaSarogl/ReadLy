@@ -222,7 +222,7 @@
 	}
 	
 	$(document).ready(function() {
-		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/getlists/' + <?= esc(session()->get('id')) ?> + '/' + <?= esc($book['id']) ?>)
+		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/bookinlists/' + <?= esc(session()->get('id')) ?> + '/' + <?= esc($book['id']) ?>)
 		.then(response => response.json())
 		.then(response => {			
 			if(response.nolist == false){
