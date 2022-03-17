@@ -26,7 +26,7 @@
 						</div>
 					</div>
 				</div>
-			<div>
+			</div>
 
 		<?php else: ?>
 
@@ -36,4 +36,26 @@
 
 		<?php endif ?>
 	</div>
+</div>
+
+<div class="container-fluid py-0">
+	<div class="container py-3">
+		<?php if (!empty($reviews) && is_array($reviews)): ?>
+	
+			<div class="d-flex justify-content-center">
+				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest additions</p>
+			</div> 
+			
+			<?php foreach ($reviews as $review): ?> 	
+				<p><?= esc($review['title']) ?></p>
+			<?php endforeach ?>
+			
+		<?php else: ?>
+
+			<h3>No Reviews</h3>
+
+			<p>Unable to find any reviews for you.</p>
+
+		<?php endif ?>
+	</div>		
 </div>

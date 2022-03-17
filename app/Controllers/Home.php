@@ -8,29 +8,16 @@ class Home extends BaseController
     {
 		$modelBooks = model(BooksModel::class);
 		$modelCovers = model(CoversModel::class);
+		$modelReviews = model(ReviewsModel::class);
 
 		$data = [
 			'books'  => $modelBooks->getRecent(12),
 			'covers' => $modelCovers->getRecent(12),
+			'reviews' => $modelReviews->getRecent(12),
 		];
-		
 		
         echo view('templates/header');
 		echo view('pages/home', $data);
-		echo view('templates/footer');
-    }
-	
-	public function profile()
-    {
-		$session = session();
-		$data = [
-			'username' => $session->get('username'),
-			'email' => $session->get('email'),
-			'joined' => $session->get('joined'),
-		];
-		
-        echo view('templates/header');
-		echo view('pages/profile',$data);
 		echo view('templates/footer');
     }
 	

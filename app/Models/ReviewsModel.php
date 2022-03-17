@@ -19,4 +19,9 @@ class ReviewsModel extends Model
 	{
 		return $this->where(['user_id' => $userID])->findAll();
 	}
+	
+	public function getRecent($amount)
+	{
+		return $this->orderBy('created_at', 'DESC')->findAll($amount);
+	}
 }
