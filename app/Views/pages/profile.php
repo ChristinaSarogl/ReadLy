@@ -49,25 +49,19 @@
 				<button class="nav-link link-dark">Completed</button>
 			</li>
 			<li class="nav-item">
-				<button class="nav-link link-dark" id="prof-reviews-link" onclick="setActive(4,<?php echo session()->get('id') ?>)">My Reviews</button>
+				<button class="nav-link link-dark" id="prof-reviews-link" onclick="setActive(4)">My Reviews</button>
 			</li>
 		</ul>
 	</div>
 	
 	<!-- Mobile -->
-	<div class="d-md-none bg-white pe-1 mx-1">
-		<div class="row">
-			<div class="dropdown text-end my-2">
-				<button class="btn btn-outline-dark dropdown-toggle" type="button" id="listMenuButton"
-					data-bs-toggle="dropdown" aria-expanded="false"></button>
-				<div class="dropdown-menu" aria-labelledby="listMenuButton">
-					<a class="dropdown-item active">Want to  Read</a>
-					<a class="dropdown-item">Reading</a>
-					<a class="dropdown-item">Completed</a>
-					<button class="dropdown-item" id="prof-reviews-btn" onclick="setActive(4,<?php echo session()->get('id') ?>)">My Reviews</button>
-				</div>
-			</div>
-		</div>
+	<div class="d-md-none bg-white mt-2 mx-1">
+		<select class="form-select" id="mobileSelect">
+			<option value="1" selected>Want to Read</option>
+			<option value="2">Reading</option>
+			<option value="3">Completed</option>
+			<option value="4">My Reviews</option>
+		</select> 
 	</div>
 	
 	<div class="row mx-md-5 mx-1 pt-2 bg-white">  
@@ -117,7 +111,7 @@
 					infoDiv.setAttribute('id','info-' + review.book_slug);
 					infoDiv.setAttribute('class','accordion-collapse collapse');
 					infoDiv.setAttribute('aria-labelledby','header-' + review.book_slug);
-					infoDiv.setAttribute('data-bs-parent','#ajax-results');
+					infoDiv.setAttribute('data-bs-parent','#ajax-results-true');
 					
 					
 					infoBody = document.createElement('div');
@@ -133,6 +127,9 @@
 					
 					buttonDiv = document.createElement('div');
 					buttonDiv.setAttribute('class','d-flex flex-row justify-content-end');
+					
+					linkBook = document.createElement('p');
+					linkBook.innerHTML = "Go to book";
 					
 					deleteButton = document.createElement('p');
 					deleteButton.setAttribute('class','btn btn-outline-danger mb-1');
@@ -150,6 +147,7 @@
 				
 				infoBody.append(reviewTitle);
 				infoBody.append(reviewBody);
+				buttonDiv.append(linkBook)
 				buttonDiv.append(editButton);
 				buttonDiv.append(deleteButton);		
 				infoBody.append(buttonDiv);
@@ -168,25 +166,23 @@
 		}
 	}
 	
-	function setActive(category,id){
+	function setActive(category){
 		prevActiveLink = document.getElementsByClassName('nav-link active');
 		
 		for(let i = 0; i <= prevActiveLink.length-1; i++){
 			prevActiveLink[i].setAttribute('class', 'nav-link link-dark');
 		}
 		
-		prevActiveBtn = document.getElementsByClassName('dropdown-item active');
-		
-		for(let i = 0; i <= prevActiveBtn.length-1; i++){
-			prevActiveBtn[i].setAttribute('class', 'dropdown-item');
-		}
-		
 		if(category == 4){			
 			document.getElementById('prof-reviews-link').setAttribute('class','nav-link active');
-			document.getElementById('prof-reviews-btn').setAttribute('class','dropdown-item active');
 		}
 		
-		getData(category,id);		
+		getData(category,<?php echo session()->get('id') ?>);		
+	}
+	
+	document.getElementById("mobileSelect").onchange = changeListener;  
+	function changeListener(){
+		setActive(this.value);
 	}
 	
 
