@@ -37,11 +37,13 @@ $routes->match(['get', 'post'], '/login', 'Login::login');
 $routes->match(['get', 'post'], '/update/(:segment)', 'User::update/$1',['filter' => 'authGuard']);
 $routes->get('/home', 'Home::home');
 $routes->get('/profile/(:segment)', 'User::profile/$1',['filter' => 'authGuard']);
-$routes->get('/ajax/get/(:segment)/(:segment)', 'Ajax::get/$1/$2');
 $routes->get('/book/(:segment)/(:segment)', 'Book::view/$1/$2');
 $routes->get('/browse/(:segment)', 'Home::category/$1');
 $routes->get('/logout', 'Login::logout');
 $routes->post('save-review/(:segment)','Book::postReview/$1');
+
+$routes->get('/ajax/get/(:segment)/(:segment)', 'Ajax::get/$1/$2');
+$routes->get('/ajax/updatelist/(:segment)/(:segment)/(:segment)', 'Ajax::updateList/$1/$2/$3');
 
 
 /*

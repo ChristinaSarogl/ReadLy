@@ -18,7 +18,7 @@
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark px-1">
       <div class="container-fluid d-flex">
-        <a class="navbar-brand" href="#">BookHood</a>
+        <a class="navbar-brand" href="<?php echo base_url() ?>/home">BookHood</a>
 		
 		<div class="nav-item pe-1 ms-auto">
 			<button type="button" class="btn btn-outline-light d-block d-lg-none"><i class="bi bi-search"></i></button>

@@ -13,13 +13,31 @@
 					<p class="mb-1 ms-1 fs-4 fw-light">by <?= esc($book['author']) ?></p>
 				</div>
 
-				<button class="btn btn-outline-dark dropdown-toggle" type="button" id="listMenuButton"
-					data-bs-toggle="dropdown" aria-expanded="false">Add to List </button>
-				<div class="dropdown-menu" aria-labelledby="listMenuButton">
-					<a class="dropdown-item active">Want to  Read</a>
-					<a class="dropdown-item">Reading</a>
-					<a class="dropdown-item">Completed</a>
-				</div>
+				<?php if(session()->get('isLoggedIn')): ?>
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="listMenuButton"
+						data-bs-toggle="dropdown" aria-expanded="false">Add to List </button>
+					<div class="dropdown-menu" aria-labelledby="listMenuButton">
+						<form class="mx-2 mt-1">
+							<?= csrf_field() ?>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="to-read" value="1">
+								<label class="form-check-label">Want to Read</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="reading" value="2">
+								<label class="form-check-label">Reading</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="complete" value="3">
+								<label class="form-check-label">Completed</label>
+							</div>
+						</form>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item"
+							href="<?php echo base_url() ?>/profile/<?= esc(session()->get('id')) ?>"><i class="bi bi-eye me-1"></i>View lists</a>
+					</div>					
+				<?php endif ?>
+				
 			</div>
 			<p>Rating</p>
 
@@ -145,4 +163,38 @@
 	function closeReview(){
 		document.getElementById('card-form').style.display = "none";
 	}	
+</script>
+
+<script>	
+	
+	$('input[id=to-read]').change(function() {
+		checkpoint = document.getElementById("to-read");
+		list = checkpoint.defaultValue;	
+		updateList(list);
+	});
+	
+	$('input[id=reading]').change(function() {
+		checkpoint = document.getElementById("reading");
+		list = checkpoint.defaultValue;
+		updateList(list);
+	});
+	
+	$('input[id=complete]').change(function() {
+		checkpoint = document.getElementById("complete");
+		list = checkpoint.defaultValue;
+		updateList(list);
+	});
+	
+	function updateList(list){
+		// Fetch data
+		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/updatelist/' + <?= esc($book['id']) ?> + '/' + list + '/' + <?= esc(session()->get('id')) ?>)
+		.then(response => response.json())
+		.then(response => {				
+			console.log(response);
+		})
+		.catch(err => {
+			// Display errors in console
+			console.log(err);
+		});
+	}
 </script>
