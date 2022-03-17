@@ -7,6 +7,8 @@
 		</div>
 		
 		<div class="col-12 col-md-8 col-lg-9 order-2 order-sm-2">
+			<div id="book-info-cont"></div>
+			
 			<div class="d-flex flex-row justify-content-between align-items-center">
 				<div class="d-flex flex-row align-items-end">
 					<p class="mb-0 me-1 fs-1"><?= esc($book['title']) ?></p>
@@ -186,15 +188,58 @@
 	});
 	
 	function updateList(list){
-		// Fetch data
 		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/updatelist/' + <?= esc($book['id']) ?> + '/' + list + '/' + <?= esc(session()->get('id')) ?>)
 		.then(response => response.json())
-		.then(response => {				
-			console.log(response);
+		.then(response => {
+			container = document.getElementById('book-info-cont');
+			
+			alert = document.createElement('div');
+			alert.setAttribute('class','alert alert-success alert-dismissible fade show p-2 mt-3');
+			alert.setAttribute('role','alert');
+			
+			closeButton = document.createElement('button');
+			closeButton.setAttribute('class','btn-close p-2');
+			closeButton.setAttribute('type','button');
+			closeButton.setAttribute('data-bs-dismiss','alert');
+			closeButton.setAttribute('aria-label','Close');
+			
+			info = document.createElement('p');
+			info.setAttribute('class','mb-0');
+			
+			if (response['action'] === 1){
+				info.innerHTML = 'You have added the book to your "' + response.list + '" list';
+			} else{
+				info.innerHTML = 'You have removed the book to your "' + response.list + '" list';
+			}
+			
+			alert.append(info);
+			alert.append(closeButton);
+			container.append(alert);
 		})
 		.catch(err => {
-			// Display errors in console
 			console.log(err);
 		});
 	}
+	
+	$(document).ready(function() {
+		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/getlists/' + <?= esc(session()->get('id')) ?> + '/' + <?= esc($book['id']) ?>)
+		.then(response => response.json())
+		.then(response => {			
+			if(response.nolist == false){
+				if (response.want != undefined){
+					document.getElementById('to-read').checked = true;
+				}
+				if (response.reading != undefined){
+					document.getElementById('reading').checked = true;
+				}
+				if (response.complete != undefined){
+					document.getElementById('complete').checked = true;
+				}
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
+		
+	});
 </script>

@@ -53,11 +53,14 @@ class Ajax extends BaseController
 					'user_id' => $userId,
 				]);
 				
-				$passdata['result'] = 'created';		
+				$passdata['action'] = 1;					
 			} else {
-				$passdata['result'] = 'deleted';
+				$passdata['action'] = 0;
 				$modelRead->where(['book_id' => $bookId])->delete();			
 			}	
+			
+			$passdata['list'] = 'Want to Read';	
+			
 		} else if ($list == 2){
 			$modelReading  = model(ReadingModel::class);
 			$books = $modelReading->getList($userId);
@@ -76,11 +79,14 @@ class Ajax extends BaseController
 					'user_id' => $userId,
 				]);
 				
-				$passdata['result'] = 'created';		
+				$passdata['action'] = 1;		
 			} else {
-				$passdata['result'] = 'deleted';
+				$passdata['action'] = 0;
 				$modelReading->where(['book_id' => $bookId])->delete();			
 			}
+			
+			$passdata['list'] = 'Reading';
+			
 		} else if ($list == 3){
 			$modelComplete  = model(CompleteModel::class);
 			$books = $modelComplete->getList($userId);
@@ -99,13 +105,54 @@ class Ajax extends BaseController
 					'user_id' => $userId,
 				]);
 				
-				$passdata['result'] = 'created';		
+				$passdata['action'] = 1;		
 			} else {
-				$passdata['result'] = 'deleted';
+				$passdata['action'] = 0;
 				$modelComplete->where(['book_id' => $bookId])->delete();			
 			}
+			
+			$passdata['list'] = 'Completed';
 		}
 		
 		print(json_encode($passdata));	
+	}
+	
+	public function getLists($userId,$bookId)
+	{
+		$modelRead = model(ToReadModel::class);
+		$modelReading = model(ReadingModel::class);
+		$modelComplete = model(CompleteModel::class);
+		
+		$passdata['nolist'] = true;
+		
+		$wants = $modelRead->getList($userId);		
+		foreach($wants as $book){
+			if ($book['book_id'] === $bookId){
+				$passdata['want'] = true;
+				$passdata['nolist'] = false;
+				break;
+			}
+		}		
+		
+		$reading = $modelReading->getList($userId);
+		foreach($reading as $book){
+			if ($book['book_id'] === $bookId){
+				$passdata['reading'] = true;
+				$passdata['nolist'] = false;
+				break;
+			}
+		}		
+		
+		$completes = $modelComplete->getList($userId);
+		foreach($completes as $book){
+			if ($book['book_id'] === $bookId){
+				$passdata['complete'] = true;
+				$passdata['nolist'] = false;
+				break;
+			}
+		}
+		
+		
+		print(json_encode($passdata));
 	}
 }
