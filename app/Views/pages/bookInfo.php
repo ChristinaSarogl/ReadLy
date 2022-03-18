@@ -60,8 +60,8 @@
 				
 			</div>
 
-			<p class="text-uppercase fst-italic mt-3 mb-2">Summary</p>
-			<p><?= esc($book['summary']) ?></p>
+			<p class="text-uppercase fst-italic mt-3 mb-2" >Summary</p>
+			<p style="white-space: pre-line"><?= esc($book['summary']) ?></p>
 			
 			<hr>
 			<p class="mb-1">Publisher: <?= esc($book['publisher']) ?></p>
@@ -192,7 +192,7 @@
 										</div>
 										<div class="flex-fill ms-3">
 											<p class="fw-bold"><?= esc($review['title']) ?></p>
-											<p><?= esc($review['review']) ?></p>
+											<p style="white-space: pre-line"><?= esc($review['review']) ?></p>
 										</div>
 									</div>
 									<p class="mt-1 mb-0 text-secondary"><?= esc($review['created_at']) ?></p>

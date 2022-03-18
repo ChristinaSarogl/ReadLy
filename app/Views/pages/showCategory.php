@@ -47,9 +47,21 @@
 				<a class="col-12 col-md-6 col-lg-4 py-2 px-2 d-flex link-dark"
 					href="<?php echo base_url() ?>/book/<?= esc($books_item['id'], 'url') ?>/<?= esc($books_item['slug'], 'url') ?>">
 					<img class="img-fluid" src="<?=base_url('covers')?>/<?php print_r($covers[$index]['file_name'])?>" width="120px">
-					<div class="flex-fill ms-2">
+					<div class="ms-2">
 						<p class="fs-4 mb-1"><?= esc($books_item['title']) ?></p>
-						<p class="mb-1">Rating</p>
+						<?php if ($ratings[$index] !== "none"): ?>
+							<?php $floorNum = floor($ratings[$index]); ?>
+							<?php for ($x = 0; $x < $floorNum; $x++): ?>
+								<i class="fa fa-star checked text-warning" style="font-size:20px"></i>
+							<?php endfor; ?>	
+							<?php for ($x = 0; $x < (5-$floorNum); $x++): ?>
+								<i class="fa fa-star-o checked text-secondary" style="font-size:20px"></i>
+							<?php endfor; ?>
+						<?php else: ?>
+							<?php for ($x = 0; $x < 5; $x++): ?>
+								<i class="fa fa-star-o checked text-secondary" style="font-size:20px"></i>
+							<?php endfor; ?>
+						<?php endif; ?>				
 					</div>
 				</a>
 				<?php $index++; ?>

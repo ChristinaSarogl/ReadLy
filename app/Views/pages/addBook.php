@@ -27,7 +27,7 @@
 					
                     <div class="mb-3">
                         <label for="add-book-summary" class="form-label">Summary</label>
-                        <textarea class="form-control" id="add-book-summary" name="summary" rows="6"></textarea>
+                        <textarea class="form-control" id="add-book-summary" name="summary" rows="6" required></textarea>
                     </div>
 					
 					<div class="form-floating mb-3">
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-6 col-sm-5 col-lg-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="category" value="Adventure" id="add-book-adventure">
+                                    <input class="form-check-input" type="radio" name="category" value="Adventure" id="add-book-adventure" required>
                                     <label class="form-check-label" for="add-book-adventure">Adventure</label>
                                 </div> 
                             </div>
@@ -106,7 +106,7 @@
                     
                     <div class="mb-3">
                         <label for="add-book-cover" class="form-label">Cover Image</label>
-                        <input type="file" name="bookCover" class="form-control" id="add-book-cover" accept=".png, .jpg" />
+                        <input type="file" name="bookCover" class="form-control" id="add-book-cover" accept=".png, .jpg" required/>
                     </div>                    
     
                     <input type="submit" class="btn btn-outline-dark btn-lg w-100" value="Add book"/>

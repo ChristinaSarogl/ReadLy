@@ -10,7 +10,7 @@ class Book extends BaseController
 		$modelCover = model(CoversModel::class);
 		
 		if ($this->request->getMethod() === 'post' && $this->validate([
-			'title' => 'required|min_length[3]',
+			'title' => 'required|min_length[2]',
 			'author' => 'required',
 			'summary' => 'required',
 			'publisher' => 'required|min_length[3]',

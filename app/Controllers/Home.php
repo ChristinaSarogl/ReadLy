@@ -52,6 +52,7 @@ class Home extends BaseController
 	{
 		$modelBooks = model(BooksModel::class);
 		$modelCovers = model(CoversModel::class);
+		$modelReviews = model(ReviewsModel::class);
 		
 		$data = [
 			'books'  => $modelBooks->getCategory($category),
@@ -60,6 +61,21 @@ class Home extends BaseController
 			'recentCovers' => $modelCovers->getRecent(6, $category),
 			
 		];
+		
+		$ratings = array();
+		foreach($data['books'] as $book){
+			$reviews = $modelReviews->getReviews($book['id']);
+			if (!empty($reviews)){
+				$bookRating = 0;
+				foreach($reviews as $review){
+					$bookRating = $bookRating + $review['rating'];
+				}
+				array_push($ratings,($bookRating/count($reviews)));
+			} else{
+				array_push($ratings,"none");
+			}			 
+		}
+		$data['ratings'] = $ratings;		
 		
 		echo view('templates/header');
 		echo view('pages/showCategory', $data);
