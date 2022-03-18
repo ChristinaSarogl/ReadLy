@@ -43,11 +43,44 @@
 		<?php if (!empty($reviews) && is_array($reviews)): ?>
 	
 			<div class="d-flex justify-content-center">
-				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest additions</p>
+				<p class="bg-dark text-wrap px-3 rounded text-white fs-4 text-uppercase">Latest Reviews</p>
 			</div> 
 			
-			<?php foreach ($reviews as $review): ?> 	
-				<p><?= esc($review['title']) ?></p>
+			<?php $index = 0; ?>
+			<?php foreach ($reviews as $review): ?>
+				<div class="card mb-2">
+					<div class="card-body">
+						<div class="row mx-2">
+							<div class="col-3 col-lg-2 col-xl-1 px-0">
+								<img class="align-middle cover border-0 img-fluid"
+									src="<?=base_url('covers')?>/<?php print_r($revCovers[$index])?>" />
+							</div>
+							<div class="col-9 col-lg-10 col-xl-11">
+								<div class="row align-items-center mb-3">
+									<p class="col-12 col-md-auto fw-bold fs-5 mb-0"><?php print_r($revTitles[$index])?></p>
+									<p class="col-12 col-md-auto m-0">
+										<?php for ($x = 0; $x < $review['rating']; $x++): ?>
+											<i class="fa fa-star checked text-warning" style="font-size:13px"></i>
+										<?php endfor; ?>	
+										<?php for ($x = 0; $x < ($review['rating']-5); $x++): ?>
+											<i class="fa fa-star-o checked text-warning" style="font-size:13px"></i>
+										<?php endfor; ?>
+									</p>
+								</div>
+								<p class="fw-bold mb-2"><?= esc($review['title']) ?></p>
+								<p class="d-flex align-self-stretch mb-2 "><?= esc($review['review']) ?></p>
+								
+								<small class="fst-italic mt-1 mb-0 text-secondary">
+									<span class="me-1"><?= esc($review['created_at']) ?></span>
+									<span>|</span>
+									<span class="ms-1"><?php print_r($usernames[$index])?></span>
+								</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<?php $index++; ?>
 			<?php endforeach ?>
 			
 		<?php else: ?>
