@@ -6,10 +6,11 @@
 				
 				<div class="text-center mt-3">
 					<?php if ($rating !== "none"): ?>
-						<?php for ($x = 0; $x < $rating; $x++): ?>
+						<?php $floorNum = floor($rating); ?>
+						<?php for ($x = 0; $x < $floorNum; $x++): ?>
 							<i class="fa fa-star checked text-warning" style="font-size:25px"></i>
 						<?php endfor; ?>	
-						<?php for ($x = 0; $x < ($rating-5); $x++): ?>
+						<?php for ($x = 0; $x < (5-$floorNum); $x++): ?>
 							<i class="fa fa-star-o checked text-secondary" style="font-size:25px"></i>
 						<?php endfor; ?>
 						<p class="mt-2"><?= esc($rating) ?> stars based on <?php echo count($reviews) ?> reviews.</p>
@@ -79,7 +80,7 @@
 			<div class="d-flex flex-row justify-content-between align-items-center">
 				<p class="fs-3 fw-light">Reviews</p>
 				<?php if(session()->get('isLoggedIn')): ?>
-					<button class="btn btn-dark h-75" onclick="addReview()">Add review</button>
+					<button class="btn btn-dark h-75" id="info-review" onclick="addReview()">Add review</button>
 				<?php endif ?>
 			</div>
 			
@@ -91,7 +92,7 @@
 							<div class="mb-1">	
 								<div class="d-flex flex-row align-items-center mb-3">
 									<p class="mb-2 me-3">Rating</p>	
-									<select class="form-select" name="userRating">
+									<select class="form-select" name="userRating" id="review-form-select">
 										<option value=1>1 star</option>
 										<option value=2>2 stars</option>
 										<option value=3>3 stars</option>
@@ -101,14 +102,14 @@
 								</div>
 								
 								<label for="title" class="form-label">Title</label>
-								<input type="text" class="form-control" name="title" placeholder="Title" required/>
+								<input type="text" class="form-control" name="title" id="review-form-title" placeholder="Title" required/>
 								
 								<label for="review" class="form-label">Review</label>
-								<textarea class="form-control" name="review" rows="6" required></textarea>
+								<textarea class="form-control" name="review" id="review-form-text-area" rows="6" required></textarea>
 								
 								<div class='d-flex justify-content-end'>
 									<button type="button" class="btn btn-secondary mt-2 me-2" onclick="closeReview()">Cancel</button>
-									<input type="submit" class="btn btn-outline-dark mt-2" value="Post Review" />
+									<input type="submit" class="btn btn-outline-dark mt-2" id="review-form-save" value="Post Review" />
 								</div>
 							</div>							
 						</form>
@@ -118,37 +119,86 @@
 			
 			<div>	
 				<?php if ((!empty($reviews) && is_array($reviews)) && (!empty($users) && is_array($users))): ?>	
-					<?php $revIndex = 0; ?>
-					<?php foreach ($reviews as $review): ?> 
-						<div class="card mb-2">
-							<div class="card-body">
-								<div class="d-flex flex-row">
-									<div class="d-flex flex-column align-items-center px-2">
-										<?php if ($users[$revIndex]['profilePic'] == NULL): ?>
-											<img class="rounded-circle"
-												src="<?=base_url('profilePics')?>/default_profile.jpg" width="80px" height="80px">
-										<?php else: ?>
-											<img class="rounded-circle"
-												src="<?=base_url('profilePics')?>/<?php print_r($users[$revIndex]['profilePic'])?>" width="80px" height="80px">
-										<?php endif ?>
-										<p class="mb-2"><?php print_r($users[$revIndex]['username'])?></p>
-										<p class="m-0">
-											<?php for ($x = 0; $x < $review['rating']; $x++): ?>
-												<i class="fa fa-star checked text-warning" style="font-size:13px"></i>
-											<?php endfor; ?>	
-											<?php for ($x = 0; $x < ($review['rating']-5); $x++): ?>
-												<i class="fa fa-star-o checked text-warning" style="font-size:13px"></i>
-											<?php endfor; ?>
-										</p>
+					<!-- Display user's review first -->
+					<?php $userIndex = 0; ?>
+					<?php foreach ($reviews as $review): ?>
+						<?php if($users[$userIndex]['id'] == session()->get('id')): ?>						
+							<div class="card mb-2">
+								<div class="card-body">
+									<div class="d-flex flex-row">
+										<div class="d-flex flex-column align-items-center px-2">
+											<?php if ($users[$userIndex]['profilePic'] == NULL): ?>
+												<img class="rounded-circle"
+													src="<?=base_url('profilePics')?>/default_profile.jpg" width="80px" height="80px">
+											<?php else: ?>
+												<img class="rounded-circle"
+													src="<?=base_url('profilePics')?>/<?php print_r($users[$userIndex]['profilePic'])?>" width="80px" height="80px">
+											<?php endif ?>
+											<p class="mb-2"><?php print_r($users[$userIndex]['username'])?></p>
+											<p class="m-0">
+												<?php for ($x = 0; $x < $review['rating']; $x++): ?>
+													<i class="fa fa-star checked text-warning" style="font-size:13px"></i>
+												<?php endfor; ?>	
+												<?php for ($x = 0; $x < ($review['rating']-5); $x++): ?>
+													<i class="fa fa-star-o checked text-warning" style="font-size:13px"></i>
+												<?php endfor; ?>
+											</p>
+										</div>
+										<div class="flex-fill ms-3">
+											<p class="fw-bold"><?= esc($review['title']) ?></p>
+											<p style="white-space: pre-line" id="view-review"><?= esc($review['review']) ?></p>
+										</div>
 									</div>
-									<div class="flex-fill ms-3">
-										<p class="fw-bold"><?= esc($review['title']) ?></p>
-										<p><?= esc($review['review']) ?></p>
-									</div>
+									<p class="mt-1 mb-0 text-secondary"><?= esc($review['created_at']) ?></p>
 								</div>
-								<p class="mt-1 mb-0 text-secondary"><?= esc($review['created_at']) ?></p>
 							</div>
-						</div>
+							
+							<script>
+								document.getElementById('info-review').innerHTML= 'Edit Review';
+								document.getElementById('save-review').setAttribute('action',"<?php echo base_url()?>/update-review/<?= esc($book['id']) ?>");
+								document.getElementById('review-form-save').setAttribute('value','Save Changes');
+								document.getElementById('review-form-title').setAttribute('value',"<?php print_r($review['title']) ?>");
+								document.getElementById('review-form-text-area').innerHTML = document.getElementById('view-review').innerHTML; 
+								$('#review-form-select').val(<?php print_r($review['rating']) ?>);
+							</script>
+						<?php endif; ?>
+						<?php $userIndex++; ?>
+					<?php endforeach ?>
+					
+					<!-- Display the rest -->
+					<?php $revIndex = 0; ?>
+					<?php foreach ($reviews as $review): ?>		
+						<?php if($users[$revIndex]['id'] != session()->get('id')): ?>							
+							<div class="card mb-2">
+								<div class="card-body">
+									<div class="d-flex flex-row">
+										<div class="d-flex flex-column align-items-center px-2">
+											<?php if ($users[$revIndex]['profilePic'] == NULL): ?>
+												<img class="rounded-circle"
+													src="<?=base_url('profilePics')?>/default_profile.jpg" width="80px" height="80px">
+											<?php else: ?>
+												<img class="rounded-circle"
+													src="<?=base_url('profilePics')?>/<?php print_r($users[$revIndex]['profilePic'])?>" width="80px" height="80px">
+											<?php endif ?>
+											<p class="mb-2"><?php print_r($users[$revIndex]['username'])?></p>
+											<p class="m-0">
+												<?php for ($x = 0; $x < $review['rating']; $x++): ?>
+													<i class="fa fa-star checked text-warning" style="font-size:13px"></i>
+												<?php endfor; ?>	
+												<?php for ($x = 0; $x < ($review['rating']-5); $x++): ?>
+													<i class="fa fa-star-o checked text-warning" style="font-size:13px"></i>
+												<?php endfor; ?>
+											</p>
+										</div>
+										<div class="flex-fill ms-3">
+											<p class="fw-bold"><?= esc($review['title']) ?></p>
+											<p><?= esc($review['review']) ?></p>
+										</div>
+									</div>
+									<p class="mt-1 mb-0 text-secondary"><?= esc($review['created_at']) ?></p>
+								</div>
+							</div>
+						<?php endif; ?>
 						<?php $revIndex++; ?>
 					<?php endforeach ?>
 				<?php endif ?>
@@ -163,28 +213,29 @@
 					<p class="fs-5 fw-bold">Recently added in <?= esc($book['category']) ?></p>
 
 					<div class="row">
-					<?php if ((!empty($similarBooks) && is_array($similarBooks)) && (!empty($similarCovers) && is_array($similarCovers))): ?>
-						<?php $index = 0; ?>
-						<?php foreach ($similarBooks as $books_item): ?>
-							<a class="col-6 col-md-12 col-xl-6 py-2 px-1"
-								href="<?php echo base_url() ?>/book/<?= esc($books_item['id'], 'url') ?>/<?= esc($books_item['slug'], 'url') ?>">
-								<figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-									<img class="align-middle h-auto cover border-0 img-fluid"
-										src="<?=base_url('covers')?>/<?php print_r($similarCovers[$index]['file_name'])?>" width="120px">
-									<figcaption class="figure-caption"><?= esc($books_item['title']) ?></figcaption>
-								</figure>
-							</a>
-							<?php $index++; ?>
-						<?php endforeach ?>
-					<?php else: ?>
-						<p>Unable to find similar books for you.</p>
-					<?php endif ?>
+						<?php if ((!empty($similarBooks) && is_array($similarBooks)) && (!empty($similarCovers) && is_array($similarCovers))): ?>
+							<?php $index = 0; ?>
+							<?php foreach ($similarBooks as $books_item): ?>
+								<a class="col-6 col-md-12 col-xl-6 py-2 px-1"
+									href="<?php echo base_url() ?>/book/<?= esc($books_item['id'], 'url') ?>/<?= esc($books_item['slug'], 'url') ?>">
+									<figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
+										<img class="align-middle h-auto cover border-0 img-fluid"
+											src="<?=base_url('covers')?>/<?php print_r($similarCovers[$index]['file_name'])?>" width="120px">
+										<figcaption class="figure-caption"><?= esc($books_item['title']) ?></figcaption>
+									</figure>
+								</a>
+								<?php $index++; ?>
+							<?php endforeach ?>
+						<?php else: ?>
+							<p>Unable to find similar books for you.</p>
+						<?php endif ?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>			
+	</div>
 </div>
+
 
 <script>
 	function addReview(){

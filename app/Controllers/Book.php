@@ -111,4 +111,30 @@ class Book extends BaseController
 			
 		} 
 	}
+	
+	public function updateReview($bookId)
+	{
+		$modelReviews = model(ReviewsModel::class);
+		$modelBooks = model(BooksModel::class);
+		$session = session();
+		
+		$review = $modelReviews->getReview($session->get('id'),$bookId);
+		
+		if ($this->request->getMethod() === 'post' && $this->validate([
+			'title' => 'required|max_length[255]',
+			'review' => 'required',			
+		])){
+			$data = [	
+				'title' => $this->request->getPost('title'),
+				'review' => $this->request->getPost('review'),
+				'rating' => $this->request->getPost('userRating')
+			];
+			
+			$modelReviews->update($review['id'],$data);
+			
+			$book = $modelBooks->getBook($bookId);
+			return redirect()->to('/book/'.$bookId.'/'.$book['slug']);
+		}
+	}
+	
 }

@@ -12,7 +12,7 @@ class ReviewsModel extends Model
 	
 	public function getReviews($bookId)
 	{
-		return $this->where(['book_id' => $bookId])->findAll();
+		return $this->where(['book_id' => $bookId])->orderBy('created_at', 'DESC')->findAll();
 	}
 	
 	public function getUserReviews($userID)
@@ -23,5 +23,10 @@ class ReviewsModel extends Model
 	public function getRecent($amount)
 	{
 		return $this->orderBy('created_at', 'DESC')->findAll($amount);
+	}
+	
+	public function getReview($userId,$bookId)
+	{
+		return $this->where(['user_id' => $userId, 'book_id' => $bookId])->first();
 	}
 }

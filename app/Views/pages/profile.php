@@ -128,16 +128,14 @@
 						buttonDiv = document.createElement('div');
 						buttonDiv.setAttribute('class','d-flex flex-row justify-content-end');
 						
-						linkBook = document.createElement('p');
+						linkBook = document.createElement('a');
+						linkBook.setAttribute('class','btn btn-outline-info me-2 mb-1');
+						linkBook.setAttribute('href','<?php echo base_url() ?>/book/' + review.book_id + '/' + review.book_slug);
 						linkBook.innerHTML = "Go to book";
 						
 						deleteButton = document.createElement('p');
 						deleteButton.setAttribute('class','btn btn-outline-danger mb-1');
 						deleteButton.innerHTML = '<i class="bi bi-trash3"></i>';
-						
-						editButton = document.createElement('p');
-						editButton.setAttribute('class','btn btn-outline-secondary me-2 mb-1');
-						editButton.innerHTML = '<i class="bi bi-pencil-square"></i>';
 						
 						btnTitleDiv.append(title);
 						btnTitleDiv.append(date);
@@ -146,8 +144,7 @@
 						
 						infoBody.append(reviewTitle);
 						infoBody.append(reviewBody);
-						buttonDiv.append(linkBook)
-						buttonDiv.append(editButton);
+						buttonDiv.append(linkBook);
 						buttonDiv.append(deleteButton);		
 						infoBody.append(buttonDiv);
 						infoDiv.append(infoBody);
