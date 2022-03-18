@@ -7,7 +7,9 @@ class AjaxSearch extends BaseController
 	function fetch($input)
 	{
 		$modelBooks = model(BooksModel::class);
-		$results = $modelBooks->fetchSearch($input);
+		$results['books'] = $modelBooks->searchTitle($input);
+		$results['authors'] = $modelBooks->searchAuthor($input);
+		$results['publishers'] = $modelBooks->searchPublisher($input);
 		
 		print(json_encode($results));
 	}

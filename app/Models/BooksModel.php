@@ -49,9 +49,19 @@ class BooksModel extends Model
 		}
 	}
 	
-	public function fetchSearch($input)
+	public function searchTitle($input)
 	{
-		return $this->like('title',$input)->orLike('author',$input)
-			->orLike('publisher',$input)->findAll();
+		return $this->like('title',$input)->findAll();
 	}
+	
+	public function searchAuthor($input)
+	{
+		return $this->like('author',$input)->findAll();
+	}
+	
+	public function searchPublisher($input)
+	{
+		return $this->like('publisher',$input)->findAll();
+	}
+	
 }

@@ -76,7 +76,7 @@
 			<form class="d-none d-md-flex">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchBox" id="searchBox">				
 			</form>
-			<div class="container-fluid w-25 me-4 border border-secondary bg-white" id="searchResults" style="position: absolute; top: 100%; z-index: 100; display: none;right:0;">
+			<div class="container-fluid w-25 me-4 p-0 border border-secondary bg-white" id="searchResults" style="position: absolute; top: 100%; z-index: 100; display: none;right:0;">
 			</div>
         </div>
       </div>
@@ -85,27 +85,68 @@
 	<script>
 		$(document).ready(function() {
 			$("#searchBox").keyup(function () {
+				//Clear space
+				resultsDiv = document.getElementById('searchResults');
+				while (resultsDiv.firstChild) {
+					resultsDiv.removeChild(resultsDiv.lastChild);
+				}
+		
 				searchValue = document.getElementById('searchBox').value;
 				console.log(searchValue);
 				if(searchValue != ""){
 					fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/search/' + searchValue)
 					.then(response => response.json())
-					.then(response => {			
-						console.log(response);
-						resultsDiv = document.getElementById('searchResults');
-						response.forEach(function(result,index){
+					.then(response => {							
+						resultBooks = document.createElement('p');
+						resultBooks.setAttribute('class','my-2 px-3 bg-secondary text-white fst-italic');
+						resultBooks.innerHTML = "Books";
+						resultsDiv.append(resultBooks);
+						response['books'].forEach(function(result,index){
 							resultLink = document.createElement('a');
+							
 							title = document.createElement('p');
+							title.setAttribute('class','px-3 mb-2');
 							title.innerHTML = result.title;
 							
 							resultsDiv.append(title);
 						});	
+						
+						resultAuthors = document.createElement('p');
+						resultAuthors.setAttribute('class','my-2 px-3 bg-secondary text-white fst-italic');
+						resultAuthors.innerHTML = "Authors";
+						resultsDiv.append(resultAuthors);
+						response['authors'].forEach(function(result,index){
+							resultLink = document.createElement('a');
+							
+							title = document.createElement('p');
+							title.setAttribute('class','px-3 mb-2');
+							title.innerHTML = result.author;
+							
+							resultsDiv.append(title);
+						});
+						
+						resultPublishers = document.createElement('p');
+						resultPublishers.setAttribute('class','my-2 px-3 bg-secondary text-white fst-italic');
+						resultPublishers.innerHTML = "Publishers";
+						resultsDiv.append(resultPublishers);
+						response['publishers'].forEach(function(result,index){
+							resultLink = document.createElement('a');
+							
+							title = document.createElement('p');
+							title.setAttribute('class','px-3 mb-2');
+							title.innerHTML = result.publisher;
+							
+							resultsDiv.append(title);
+						});
+						
 						resultsDiv.style.display = "block";
 					})
 					.catch(err => {
 						console.log(err);
 					});
-				} 
+				} else {
+					resultsDiv.style.display = "none";
+				}					
 			});
 		});
 	</script>
