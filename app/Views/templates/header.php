@@ -21,20 +21,20 @@
     <title>BookHood</title>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark px-1">
+    <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark px-1">
       <div class="container-fluid d-flex">
         <a class="navbar-brand" href="<?php echo base_url() ?>/home">BookHood</a>
 		
 		<div class="nav-item pe-1 ms-auto">
-			<button type="button" class="btn btn-outline-light d-block d-lg-none"><i class="bi bi-search"></i></button>
+			<button type="button" class="btn btn-outline-light d-block d-md-none"><i class="bi bi-search"></i></button>
 		</div>
 		<?php if(!session()->get('isLoggedIn')): ?>
 			<div class="nav-item pe-1">
-				<a href="<?php echo base_url() ?>/login" class="btn btn-outline-secondary d-block d-lg-none"><i class="bi bi-box-arrow-in-right"></i></i></a>
+				<a href="<?php echo base_url() ?>/login" class="btn btn-outline-secondary d-block d-md-none"><i class="bi bi-box-arrow-in-right"></i></i></a>
 			</div>
 		<?php else: ?>
 			<div class="nav-item pe-1">
-				<a href="<?php echo base_url() ?>/profile/<?php echo session()->get('id') ?>" class="btn btn-outline-secondary d-block d-lg-none"><i class="bi bi-person-circle"></i></i></a>
+				<a href="<?php echo base_url() ?>/profile/<?php echo session()->get('id') ?>" class="btn btn-outline-secondary d-block d-md-none"><i class="bi bi-person-circle"></i></i></a>
 			</div>
 		<?php endif ?>
 		
@@ -73,10 +73,39 @@
 					</li>
 				<?php endif ?>
 			</ul>
-			<form class="d-none d-lg-flex me-2">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-light" type="submit">Search</button>
+			<form class="d-none d-md-flex">
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchBox" id="searchBox">				
 			</form>
+			<div class="container-fluid w-25 me-4 border border-secondary bg-white" id="searchResults" style="position: absolute; top: 100%; z-index: 100; display: none;right:0;">
+			</div>
         </div>
       </div>
     </nav>
+	
+	<script>
+		$(document).ready(function() {
+			$("#searchBox").keyup(function () {
+				searchValue = document.getElementById('searchBox').value;
+				console.log(searchValue);
+				if(searchValue != ""){
+					fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/search/' + searchValue)
+					.then(response => response.json())
+					.then(response => {			
+						console.log(response);
+						resultsDiv = document.getElementById('searchResults');
+						response.forEach(function(result,index){
+							resultLink = document.createElement('a');
+							title = document.createElement('p');
+							title.innerHTML = result.title;
+							
+							resultsDiv.append(title);
+						});	
+						resultsDiv.style.display = "block";
+					})
+					.catch(err => {
+						console.log(err);
+					});
+				} 
+			});
+		});
+	</script>

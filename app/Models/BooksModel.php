@@ -48,4 +48,10 @@ class BooksModel extends Model
 			}				
 		}
 	}
+	
+	public function fetchSearch($input)
+	{
+		return $this->like('title',$input)->orLike('author',$input)
+			->orLike('publisher',$input)->findAll();
+	}
 }
