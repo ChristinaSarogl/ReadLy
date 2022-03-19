@@ -14,11 +14,11 @@
 							<?php foreach ($books as $books_item): ?> 		
 								<a class="col-6 col-sm-4 col-lg-2 py-2 px-1 text-center" 
 									href="<?php echo base_url() ?>/book/<?= esc($books_item['id'], 'url') ?>/<?= esc($books_item['slug'], 'url') ?>">
-								  <figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
-									<img class="align-middle h-auto cover border-0 img-fluid"
-										src="<?=base_url('covers')?>/<?php print_r($covers[$index]['file_name'])?>" width="140px">
-									<figcaption class="figure-caption"><?= esc($books_item['title']) ?></figcaption>
-								  </figure>
+									<figure class="figure pb-2 mb-1 h-100 d-flex flex-column align-items-center">
+										<img class="align-middle h-auto cover border-0 img-fluid"
+											src="<?=base_url('covers')?>/<?php print_r($covers[$index]['file_name'])?>" width="140px">
+										<figcaption class="figure-caption"><?= esc($books_item['title']) ?></figcaption>
+									</figure>
 								</a>
 							
 								<?php $index++; ?>

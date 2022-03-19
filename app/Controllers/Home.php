@@ -81,4 +81,23 @@ class Home extends BaseController
 		echo view('pages/showCategory', $data);
 		echo view('templates/footer');
 	}
+	
+	public function search($input){
+		$modelBooks = model(BooksModel::class);
+		$modelCovers = model(CoversModel::class);
+		
+		$data['books'] = $modelBooks->searchTitle($input);
+		$data['authors'] = $modelBooks->searchAuthor($input);
+		$data['publishers'] = $modelBooks->searchPublisher($input);
+		
+		$covers = array();
+		foreach($data['books'] as $book){
+			array_push($covers,$modelCovers->getCover($book['cover']));
+		}
+		$data['covers'] = $covers;
+		
+		echo view('templates/header');
+		echo view('pages/search',$data);
+		echo view('templates/footer');
+	}
 }
