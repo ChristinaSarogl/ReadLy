@@ -71,6 +71,7 @@
 							}
 							
 							moreLink = document.createElement('a');
+							moreLink.setAttribute('href','<?php echo base_url()?>/search=' + searchValue);
 							moreLink.setAttribute('class','d-flex justify-content-end me-3');
 							moreLink.innerHTML = '[show all]';
 							
@@ -178,8 +179,6 @@
 				if (document.activeElement.tagName === "INPUT") {
 					searchValue = document.getElementById('searchBox').value;
 					searchValueMob = document.getElementById('searchBoxMob').value;
-					console.log("searchValue: " + searchValue);
-					console.log("searchValueMob: " + searchValueMob);
 					if(searchValue != ""){
 						results.show();
 					}
@@ -250,10 +249,12 @@
 					</li>
 				<?php endif ?>
 			</ul>
-			<form class="d-none d-md-flex">
+			<form action="<?php echo base_url()?>/search" method="post" class="d-none d-md-flex">
+				<?= csrf_field() ?>
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchBox" id="searchBox">				
+				<button class="btn btn-outline-light" type="submit">Search</button>
 			</form>
-			<div class="container-fluid w-25 me-4 p-0 border border-secondary bg-white" id="searchResults"></div>
+			<div class="container-fluid w-25 me-5 p-0 border border-secondary bg-white" id="searchResults"></div>
         </div>
       </div>
     </nav>

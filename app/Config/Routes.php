@@ -35,6 +35,7 @@ $routes->match(['get', 'post'], '/add_book', 'Book::addBook');
 $routes->match(['get', 'post'], '/register', 'Login::register');
 $routes->match(['get', 'post'], '/login', 'Login::login');
 $routes->match(['get', 'post'], '/update/(:segment)', 'User::update/$1',['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/search', 'Home::search');
 
 $routes->get('/home', 'Home::home');
 $routes->get('/profile/(:segment)', 'User::profile/$1',['filter' => 'authGuard']);

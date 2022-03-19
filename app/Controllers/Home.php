@@ -82,22 +82,39 @@ class Home extends BaseController
 		echo view('templates/footer');
 	}
 	
-	public function search($input){
+	public function search($input=null)
+	{
 		$modelBooks = model(BooksModel::class);
 		$modelCovers = model(CoversModel::class);
 		
+		if ($this->request->getMethod() === 'post'){
+			$input = $this->request->getPost('searchBox');
+		}	
+		
 		$data['books'] = $modelBooks->searchTitle($input);
-		$data['authors'] = $modelBooks->searchAuthor($input);
-		$data['publishers'] = $modelBooks->searchPublisher($input);
+		
+		$dataAuthors = $modelBooks->searchAuthor($input);
+		$authors = array();		
+		foreach($dataAuthors as $author){
+			array_push($authors,$author['author']);
+		}
+		$data['authors'] = (array_values(array_unique($authors)));
+		
+		$dataPublishers = $modelBooks->searchPublisher($input);
+		$publishers = array();		
+		foreach($dataPublishers as $publisher){
+			array_push($publishers,$publisher['publisher']);
+		}
+		$data['publishers'] = (array_values(array_unique($publishers)));
 		
 		$covers = array();
 		foreach($data['books'] as $book){
 			array_push($covers,$modelCovers->getCover($book['cover']));
 		}
 		$data['covers'] = $covers;
-		
+			
 		echo view('templates/header');
 		echo view('pages/search',$data);
-		echo view('templates/footer');
+		echo view('templates/footer'); 
 	}
 }
