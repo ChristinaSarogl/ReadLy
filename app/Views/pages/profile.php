@@ -225,6 +225,7 @@
 			while (revDiv.firstChild) {
 				revDiv.removeChild(revDiv.lastChild);
 			}
+			revDiv.setAttribute('id','ajax-reviews');
 		}
 		
 		
@@ -239,6 +240,7 @@
 			getReviews(<?php echo session()->get('id') ?>);
 			
 		} else if(category == 1){
+			
 			document.getElementById('prof-want-link').setAttribute('class','nav-link active');
 			getList(category,<?php echo session()->get('id') ?>);
 		} else if (category == 2){

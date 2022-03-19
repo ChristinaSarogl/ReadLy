@@ -26,7 +26,7 @@ class BooksModel extends Model
 	
 	public function getCategory($category)
 	{
-		return $this->where(['category' => $category])->findAll();
+		return $this->where(['category' => $category])->orderBy('id', 'DESC')->findAll();
 	}
 	
 	public function getSimilar($id, $category)
