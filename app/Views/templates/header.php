@@ -26,23 +26,29 @@
 			$("#searchBox").keyup(function () {				
 				clearTimeout(typingTimer);
 				if ($('#searchBox').val()) {
-					typingTimer = setTimeout(doneTyping, doneTypingInterval);
+					typingTimer = setTimeout(doneTyping,doneTypingInterval,'searchBox','searchResults');
+				} else {
+					resultsDiv.hide();
+				}
+			});
+			
+			$("#searchBoxMob").keyup(function () {				
+				clearTimeout(typingTimer);
+				if ($('#searchBoxMob').val()) {
+					typingTimer = setTimeout(doneTyping,doneTypingInterval,'searchBoxMob','searchResultsMob');
 				} else {
 					resultsDiv.hide();
 				}
 			});
 
-			function doneTyping () {
+			function doneTyping(searchId,resultsContainer) {
 				//Clear space
-				resultsDiv = document.getElementById('searchResults');
+				resultsDiv = document.getElementById(resultsContainer);
 				while (resultsDiv.firstChild) {
 					resultsDiv.removeChild(resultsDiv.lastChild);
 				}
-				
-				resultsDiv = $("#searchResults");
-				searchValue = document.getElementById('searchBox').value;
-				console.log(searchValue);
-				
+				resultsDiv =$('#' + resultsContainer);
+				searchValue = document.getElementById(searchId).value;				
 				fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/search/' + searchValue)
 					.then(response => response.json())
 					.then(response => {						
@@ -147,7 +153,7 @@
 								
 								title = document.createElement('p');
 								title.setAttribute('class','px-3 mb-2');
-								title.innerHTML = result.title;
+								title.innerHTML = result.publisher;
 								
 								resultLink.append(title);
 								resultsDiv.append(resultLink);
@@ -163,31 +169,41 @@
 			
 			$(document).click(function() {
 				var results = $("#searchResults");
-				var searchField = $("#searchBox");
+				var resultsMob = $("#searchResultsMob");
+				
 				if (!results.is(event.target) && !results.has(event.target).length) {
 					results.hide();
 				}
 				
 				if (document.activeElement.tagName === "INPUT") {
 					searchValue = document.getElementById('searchBox').value;
+					searchValueMob = document.getElementById('searchBoxMob').value;
+					console.log("searchValue: " + searchValue);
+					console.log("searchValueMob: " + searchValueMob);
 					if(searchValue != ""){
 						results.show();
-					}					
+					}
+					if(searchValueMob != ""){
+						resultsMob.show();
+					}						
+					
+					
 				}
 			});
 			
 		});		
 	</script>
-
+	
     <title>BookHood</title>
   </head>
+  
   <body>
     <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark px-1">
       <div class="container-fluid d-flex">
         <a class="navbar-brand" href="<?php echo base_url() ?>/home">BookHood</a>
 		
 		<div class="nav-item pe-1 ms-auto">
-			<button type="button" class="btn btn-outline-light d-block d-md-none"><i class="bi bi-search"></i></button>
+			<button type="button" class="btn btn-outline-light d-block d-md-none" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></button>
 		</div>
 		<?php if(!session()->get('isLoggedIn')): ?>
 			<div class="nav-item pe-1">
@@ -237,9 +253,18 @@
 			<form class="d-none d-md-flex">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchBox" id="searchBox">				
 			</form>
-			<div class="container-fluid w-25 me-4 p-0 border border-secondary bg-white" id="searchResults" style="">
-				test
-			</div>
+			<div class="container-fluid w-25 me-4 p-0 border border-secondary bg-white" id="searchResults"></div>
         </div>
       </div>
     </nav>
+	
+	<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchBoxMob" id="searchBoxMob">
+					<div class="container-fluid p-0 border border-secondary bg-white" id="searchResultsMob"></div>
+				</div>
+			</div>
+		</div>
+	</div>
