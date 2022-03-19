@@ -4,6 +4,7 @@
 		<p class="text-secondary mb-2 ms-2">(<?php echo count($books)+count($authors)+count($publishers) ?> results)</p>
 	</div>
 	<hr>
+		
 	<div class="d-none d-md-inline">
 		<ul class="nav nav-tabs mt-4">
 			<li class="nav-item">
@@ -103,4 +104,10 @@
 	function changeListener(){
 		getResults(this.value);
 	}
+	
+	$(document).ready(function() {
+		<?php if($tab != null): ?>
+			getResults(<?= esc($tab) ?>);
+		<?php endif ?>
+	});
 </script>

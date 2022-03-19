@@ -82,7 +82,7 @@ class Home extends BaseController
 		echo view('templates/footer');
 	}
 	
-	public function search($input=null)
+	public function search($input=null,$resultTab=null)
 	{
 		$modelBooks = model(BooksModel::class);
 		$modelCovers = model(CoversModel::class);
@@ -90,6 +90,9 @@ class Home extends BaseController
 		if ($this->request->getMethod() === 'post'){
 			$input = $this->request->getPost('searchBox');
 		}	
+		/* print_r($input); */
+		/* print_r("Tab " + $resultTab); */
+		$data['tab'] = $resultTab;
 		
 		$data['books'] = $modelBooks->searchTitle($input);
 		

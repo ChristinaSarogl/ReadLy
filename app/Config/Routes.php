@@ -41,7 +41,7 @@ $routes->get('/home', 'Home::home');
 $routes->get('/profile/(:segment)', 'User::profile/$1',['filter' => 'authGuard']);
 $routes->get('/book/(:segment)/(:segment)', 'Book::view/$1/$2');
 $routes->get('/browse/(:segment)', 'Home::category/$1');
-$routes->get('/search=(:segment)', 'Home::search/$1');
+$routes->get('/search=(:segment)/opt=(:segment)', 'Home::search/$1/$2');
 $routes->get('/logout', 'Login::logout');
 
 $routes->post('save-review/(:segment)','Book::postReview/$1');

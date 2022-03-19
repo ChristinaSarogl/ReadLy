@@ -71,7 +71,7 @@
 							}
 							
 							moreLink = document.createElement('a');
-							moreLink.setAttribute('href','<?php echo base_url()?>/search=' + searchValue);
+							moreLink.setAttribute('href','<?php echo base_url()?>/search=' + searchValue + '/opt=1');
 							moreLink.setAttribute('class','d-flex justify-content-end me-3');
 							moreLink.innerHTML = '[show all]';
 							
@@ -108,6 +108,7 @@
 								resultsDiv.append(title);
 							}
 							moreLink = document.createElement('a');
+							moreLink.setAttribute('href','<?php echo base_url()?>/search=' + searchValue + '/opt=2');
 							moreLink.setAttribute('class','d-flex justify-content-end me-3');
 							moreLink.innerHTML = '[show all]';
 							
@@ -143,6 +144,7 @@
 								resultsDiv.append(resultLink);
 							}
 							moreLink = document.createElement('a');
+							moreLink.setAttribute('href','<?php echo base_url()?>/search=' + searchValue + '/opt=3');
 							moreLink.setAttribute('class','d-flex justify-content-end me-3');
 							moreLink.innerHTML = '[show all]';
 							
