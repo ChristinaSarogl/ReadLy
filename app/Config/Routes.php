@@ -51,6 +51,7 @@ $routes->get('/ajax/getlists/(:segment)/(:segment)', 'Ajax::getLists/$1/$2');
 $routes->get('/ajax/updatelist/(:segment)/(:segment)/(:segment)', 'Ajax::updateList/$1/$2/$3');
 $routes->get('/ajax/bookinlists/(:segment)/(:segment)', 'Ajax::getBookInLists/$1/$2');
 $routes->get('/ajax/search/(:segment)', 'AjaxSearch::fetch/$1');
+$routes->get('/ajax/sortby/(:segment)/(:segment)', 'Ajax::sortCategory/$1/$2');
 
 
 /*

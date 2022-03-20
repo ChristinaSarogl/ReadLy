@@ -90,8 +90,7 @@ class Home extends BaseController
 		if ($this->request->getMethod() === 'post'){
 			$input = $this->request->getPost('searchBox');
 		}	
-		/* print_r($input); */
-		/* print_r("Tab " + $resultTab); */
+		
 		$data['tab'] = $resultTab;
 		
 		$data['books'] = $modelBooks->searchTitle($input);

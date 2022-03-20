@@ -49,6 +49,11 @@ class BooksModel extends Model
 		}
 	}
 	
+	public function sortCategoryByName($category)
+	{
+		return $this->where(['category' => $category])->orderBy('title', 'ASC')->findAll();
+	}
+	
 	public function searchTitle($input)
 	{
 		return $this->like('title',$input)->findAll();
@@ -63,5 +68,7 @@ class BooksModel extends Model
 	{
 		return $this->like('publisher',$input)->findAll();
 	}
+	
+	
 	
 }

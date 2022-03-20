@@ -189,4 +189,46 @@ class Ajax extends BaseController
 		
 		print(json_encode($passdata));
 	}
+	
+	public function sortCategory($sortBy, $category){
+		$modelBooks = model(BooksModel::class);
+		$modelCovers = model(CoversModel::class);
+		$modelReviews = model(ReviewsModel::class);
+		
+		if ($sortBy == 2) {
+			$data['books'] = $modelBooks->sortCategoryByName($category);
+			
+			$covers= array();
+			foreach($data['books'] as $book){
+				$cover = $modelCovers->getCover($book['cover']);
+				array_push($covers,$cover);
+			}
+			$data['covers'] = $covers;
+			
+		} else {
+			$data['books'] = $modelBooks->getCategory($category);
+			$data['covers'] = $modelCovers->getCategory($category);
+		}
+		
+		$ratings = array();
+		$index = 0; 
+		foreach($data['books'] as $book){
+			$reviews = $modelReviews->getReviews($book['id']);
+			if (!empty($reviews)){
+				$bookRating = 0;
+				foreach($reviews as $review){
+					$bookRating = $bookRating + $review['rating'];
+				}
+				$ratings[$index]['rating'] = ($bookRating/count($reviews));
+			} else{
+				$ratings[$index]['rating'] = 0;
+			}	
+			$ratings[$index]['book'] = $book['id'];
+			$index++;			
+		}
+		$data['ratings'] = $ratings;
+		
+		print(json_encode($data));
+		
+	}
 }
