@@ -40,6 +40,11 @@
 						<input type="date" name="release" class="form-control" required />
                     </div>
                     
+					<div class="form-floating mb-3">
+						<input type="text" id="add-book-isbn" name="isbn" class="form-control" placeholder="1234567890123" required>
+						<label for="add-book-isbn">ISBN</label>
+					</div> 
+					
                     <div class="mb-3">
                         <p>Category</p>
                         

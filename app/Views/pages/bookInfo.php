@@ -64,12 +64,20 @@
 			<p style="white-space: pre-line"><?= esc($book['summary']) ?></p>
 			
 			<hr>
-			<p class="mb-1">Publisher: <?= esc($book['publisher']) ?></p>
-			<p class="mb-1">Release Date: <?= esc($book['release_date']) ?></p>
-			<a class="mb-1 link-dark"
-				href="<?php echo base_url() ?>/browse/<?= esc($book['category'], 'url') ?>">
-				Category: <?= esc($book['category']) ?>
-			</a>
+			<div class="row">
+				<div class="col-12 col-sm-6 order-1">
+					<p class="mb-1">Publisher: <?= esc($book['publisher']) ?></p>
+					<p class="mb-1">Release Date: <?= esc($book['release_date']) ?></p>
+				</div>
+				<div class="col-12 col-sm-6 order-2">
+					<p class="mb-1">ISBN: <?= esc($book['isbn']) ?></p>
+					<a class="mb-1 link-dark"
+						href="<?php echo base_url() ?>/browse/<?= esc($book['category'], 'url') ?>">
+						Category: <?= esc($book['category']) ?>
+					</a>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 	

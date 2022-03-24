@@ -15,6 +15,7 @@ class Book extends BaseController
 			'summary' => 'required',
 			'publisher' => 'required|min_length[3]',
 			'release' => 'required|valid_date',
+			'isbn' => 'required|is_unique[books.isbn]',
 			'category' => 'required',
 			'bookCover' => 'uploaded[bookCover]',
 		])){					
@@ -35,6 +36,7 @@ class Book extends BaseController
 				'summary' => $this->request->getPost('summary'),
 				'publisher' => $this->request->getPost('publisher'),
 				'release_date' => $this->request->getPost('release'),
+				'isbn' => $this->request->getPost('isbn'),
 				'slug'  => url_title($this->request->getPost('title'), '-', true),
 				'cover' => $cover_id,
 				'category' => $this->request->getPost('category')
