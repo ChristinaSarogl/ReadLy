@@ -100,12 +100,12 @@
 								resultLink = document.createElement('a');
 								resultLink.setAttribute('class','link-dark');
 								
-								title = document.createElement('p');
-								title.setAttribute('class','px-3 mb-2');
-								title.innerHTML = response['authors'][i].author;
+								author = document.createElement('p');
+								author.setAttribute('class','px-3 mb-2');
+								author.innerHTML = response['authors'][i];
 								
-								resultLink.append(title);
-								resultsDiv.append(title);
+								resultLink.append(author);
+								resultsDiv.append(resultLink);
 							}
 							moreLink = document.createElement('a');
 							moreLink.setAttribute('href','<?php echo base_url()?>/search=' + searchValue + '/opt=2');
@@ -118,11 +118,11 @@
 								resultLink = document.createElement('a');
 								resultLink.setAttribute('class','link-dark');
 								
-								title = document.createElement('p');
-								title.setAttribute('class','px-3 mb-2');
-								title.innerHTML = result.title;
+								author = document.createElement('p');
+								author.setAttribute('class','px-3 mb-2');
+								author.innerHTML = result;
 								
-								resultLink.append(title);
+								resultLink.append(author);
 								resultsDiv.append(resultLink);
 							});	
 						}
@@ -136,11 +136,11 @@
 								resultLink = document.createElement('a');
 								resultLink.setAttribute('class','link-dark');
 								
-								title = document.createElement('p');
-								title.setAttribute('class','px-3 mb-2');
-								title.innerHTML = response['publishers'][i].publisher;
+								publisher = document.createElement('p');
+								publisher.setAttribute('class','px-3 mb-2');
+								publisher.innerHTML = response['publishers'][i];
 								
-								resultLink.append(title);
+								resultLink.append(publisher);
 								resultsDiv.append(resultLink);
 							}
 							moreLink = document.createElement('a');
@@ -154,11 +154,11 @@
 								resultLink = document.createElement('a');
 								resultLink.setAttribute('class','link-dark');
 								
-								title = document.createElement('p');
-								title.setAttribute('class','px-3 mb-2');
-								title.innerHTML = result.publisher;
+								publisher = document.createElement('p');
+								publisher.setAttribute('class','px-3 mb-2');
+								publisher.innerHTML = result;
 								
-								resultLink.append(title);
+								resultLink.append(publisher);
 								resultsDiv.append(resultLink);
 							});	
 						}
