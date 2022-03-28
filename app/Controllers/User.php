@@ -25,7 +25,7 @@ class User extends BaseController
 		}
 		
         echo view('templates/header');
-		echo view('pages/profile',$data);
+		echo view('user/profile',$data);
 		echo view('templates/footer');
     }
 	
@@ -65,7 +65,7 @@ class User extends BaseController
 				'email' => $user['email'],
 			];
 			echo view('templates/header');
-			echo view('pages/editProfile',$data);
+			echo view('user/editProfile',$data);
 			echo view('templates/footer');
 		}
 	}

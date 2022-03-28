@@ -44,7 +44,7 @@ class Home extends BaseController
 		}
 		
         echo view('templates/header');
-		echo view('pages/home', $data);
+		echo view('home/home', $data);
 		echo view('templates/footer');
     }
 	
@@ -78,7 +78,7 @@ class Home extends BaseController
 		$data['ratings'] = $ratings;		
 		
 		echo view('templates/header');
-		echo view('pages/showCategory', $data);
+		echo view('home/showCategory', $data);
 		echo view('templates/footer');
 	}
 	
@@ -116,7 +116,7 @@ class Home extends BaseController
 		$data['covers'] = $covers;
 			
 		echo view('templates/header');
-		echo view('pages/search',$data);
+		echo view('home/search',$data);
 		echo view('templates/footer'); 
 	}
 }

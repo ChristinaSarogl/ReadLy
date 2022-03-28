@@ -45,7 +45,7 @@ class Book extends BaseController
 			return redirect()->to('/home');
 		} else {
 			echo view('templates/header');
-			echo view('pages/addBook');
+			echo view('book/addBook');
 			echo view('templates/footer');
 		}	
 	}
@@ -57,7 +57,7 @@ class Book extends BaseController
 		$modelReviews = model(ReviewsModel::class);
 		$modelUsers = model(UsersModel::class);
 		
-		$data['book'] = $modelBooks->getBook($id);
+		$data['book'] = $modelBooks->getBook($id);		
 		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
 		
 		$reviews = $modelReviews->getReviews($id);
@@ -84,7 +84,7 @@ class Book extends BaseController
 		$data['similarCovers'] = $modelCovers->getSimilar($id,$data['book']['category']);
 		
 		echo view('templates/header');
-		echo view('pages/bookInfo', $data);
+		echo view('book/bookInfo', $data);
 		echo view('templates/footer');
 	}
 	

@@ -34,7 +34,7 @@ class Login extends BaseController
 				
 		} else {
 			echo view('templates/header');
-			echo view('pages/login');
+			echo view('login/login');
 			echo view('templates/footer');
 		}
     }
@@ -72,7 +72,7 @@ class Login extends BaseController
 			return redirect()->to('/home');
 		} else {
 			echo view('templates/header');
-			echo view('pages/register');
+			echo view('login/register');
 			echo view('templates/footer');
 		}
     }
