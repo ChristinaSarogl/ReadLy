@@ -21,6 +21,8 @@ class Home extends BaseController
 			$data['reviews'] = $reviews;
 			$usernames = array();
 			$titles = array();
+			$booksIds = array();
+			$booksSlugs = array();
 			$covers = array();
 			$index = 0;
 			foreach($reviews as $review){
@@ -28,6 +30,8 @@ class Home extends BaseController
 				$usernames[$index] = $user['username'];
 				$book = $modelBooks->getBook($review['book_id']);
 				$titles[$index] = $book['title'];
+				$booksIds[$index] = $book['id'];
+				$booksSlugs[$index] = $book['slug'];
 				$cover = $modelCovers->getCover($book['cover']);
 				$covers[$index] = $cover['file_name'];
 				$index++;
@@ -36,11 +40,15 @@ class Home extends BaseController
 			$data['usernames'] = $usernames;
 			$data['revTitles'] = $titles;
 			$data['revCovers'] = $covers;
+			$data['revIds'] = $booksIds;
+			$data['revSlugs'] = $booksSlugs;
 		} else {
 			$data['reviews'] = array();
 			$data['usernames'] = array();
 			$data['revTitles'] = array();
 			$data['revCovers'] = array();
+			$data['revIds'] = array();
+			$data['revSlugs'] = array();
 		}
 		
         echo view('templates/header');

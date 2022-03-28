@@ -48,7 +48,8 @@
 			
 			<?php $index = 0; ?>
 			<?php foreach ($reviews as $review): ?>
-				<div class="card mb-2">
+				<a class="card mb-2 link-dark"
+					href="<?php echo base_url() ?>/book/<?= esc($revIds[$index], 'url') ?>/<?= esc($revSlugs[$index], 'url') ?>">
 					<div class="card-body">
 						<div class="row mx-2">
 							<div class="col-3 col-lg-2 col-xl-1 px-0">
@@ -78,7 +79,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 				
 				<?php $index++; ?>
 			<?php endforeach ?>
