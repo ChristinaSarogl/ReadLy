@@ -1,5 +1,6 @@
-<p class="fs-4 pt-3 text-center">Find a Bookstore</p>
-<div class="container mt-3 p-2 border border-dark border-2 rounded">
+<p class="fs-3 pt-3 text-center">Find a Bookstore</p>
+<p class="fs-5 text-danger text-center" id="gps-error" style="display:none;">Place enable your GPS location.</p>
+<div class="container mt-3 p-2 border border-dark border-2 rounded" id="map-container">
 	<div id="bookstore-map" style="height:600px;">
 	</div>
 </div>
@@ -60,6 +61,8 @@ function handleLocationError(browserHasGeolocation) {
     } else {
         console.log("Error: Your browser doesn't support geolocation.");
     }
+	document.getElementById("map-container").style.display="none";
+	document.getElementById("gps-error").style.display="block";
 }
 
 </script>
