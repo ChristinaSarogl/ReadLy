@@ -85,18 +85,21 @@
 			$('#searchBooks').show();
 			$('#searchAuthors').hide();
 			$('#searchPublishers').hide();
+			$('#searchSelect').val("1");
 		} else if (option == 2){
 			document.getElementById('search-authors').setAttribute('class','nav-link active');
 			document.getElementById('totalSearchResults').innerHTML = "<?php echo count($authors) ?> authors";	
 			$('#searchBooks').hide();
 			$('#searchAuthors').show();
 			$('#searchPublishers').hide();
+			$('#searchSelect').val("2");
 		} else {
 			document.getElementById('search-publishers').setAttribute('class','nav-link active');
 			document.getElementById('totalSearchResults').innerHTML = "<?php echo count($publishers) ?> publishers";
 			$('#searchBooks').hide();
 			$('#searchAuthors').hide();
 			$('#searchPublishers').show();
+			$('#searchSelect').val("3");
 		}		
 	}
 	
