@@ -57,7 +57,13 @@ class Book extends BaseController
 		$modelReviews = model(ReviewsModel::class);
 		$modelUsers = model(UsersModel::class);
 		
-		$data['book'] = $modelBooks->getBook($id);		
+		$data['book'] = $modelBooks->getBook($id);	
+		$url = "https://openlibrary.org/isbn/"
+			.$data['book']['isbn']
+			.".json";
+		$json_data = file_get_contents($url);
+		$data['info'] = json_decode($json_data);
+		
 		$data['cover'] = $modelCovers->getCover($data['book']['cover']);
 		
 		$reviews = $modelReviews->getReviews($id);

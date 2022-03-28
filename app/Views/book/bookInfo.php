@@ -68,6 +68,11 @@
 				<div class="col-12 col-sm-6 order-1">
 					<p class="mb-1">Publisher: <?= esc($book['publisher']) ?></p>
 					<p class="mb-1">Release Date: <?= esc($book['release_date']) ?></p>
+					<?php if(property_exists($info, 'number_of_pages')): ?>
+						<p>Pages: <?php print_r($info->number_of_pages) ?></p>
+					<?php else : ?>
+						<p>Pages: Not defined </p>
+					<?php endif ?>
 				</div>
 				<div class="col-12 col-sm-6 order-2">
 					<p class="mb-1">ISBN: <?= esc($book['isbn']) ?></p>
