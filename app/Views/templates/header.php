@@ -241,6 +241,9 @@
 						<li><a class="dropdown-item" href="<?php echo base_url() ?>/browse/Sci-fi">Science Fiction</a></li>
 					</ul>
 				</li> 
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/find-bookstore">Find Bookstore</a>
+				</li>
 				<?php if(!session()->get('isLoggedIn')): ?>
 					<li class="nav-item d-none d-lg-flex">
 						<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/login">Login</a>

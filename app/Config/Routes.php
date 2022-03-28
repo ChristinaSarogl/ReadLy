@@ -43,6 +43,7 @@ $routes->get('/book/(:segment)/(:segment)', 'Book::view/$1/$2');
 $routes->get('/browse/(:segment)', 'Home::category/$1');
 $routes->get('/search=(:segment)/opt=(:segment)', 'Home::search/$1/$2');
 $routes->get('/logout', 'Login::logout');
+$routes->get('/find-bookstore', 'Location::view');
 
 $routes->post('save-review/(:segment)','Book::postReview/$1');
 $routes->post('update-review/(:segment)','Book::updateReview/$1');
