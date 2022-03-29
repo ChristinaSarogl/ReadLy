@@ -246,43 +246,39 @@
 		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/getlists/5/' + userId)
 		.then(response => response.json())
 		.then(response => {			
-			if(response.result == undefined){	
-				listDiv = document.createElement('ul');
-				listDiv.setAttribute('class','list-group list-group-flush');
-				
-				response.forEach(function(book,index) {		
-					bookLi = document.createElement('li');
-					bookLi.setAttribute('class','list-group-item');
+			if(response.result == undefined){
+				response.forEach(function(book,index) {			
+					bookDiv = document.createElement('div');
+					bookDiv.setAttribute('class','col-6 col-sm-4 col-lg-2 py-2 px-1 text-center');
+					bookFigure = document.createElement('figure');
+					bookFigure.setAttribute('class','figure pb-2 mb-1 h-100 d-flex flex-column align-items-center');
 					
-					infoDiv = document.createElement('div');
-					infoDiv.setAttribute('class','row');
+					bookLink = document.createElement('a');
+					bookLink.setAttribute('href','<?php echo base_url() ?>/book/' + book.book_id + '/' + book.book_slug);
 					
-					title = document.createElement('p');
-					title.setAttribute('class','col-12 col-md-6 col-lg-8 col-xl-9');
-					title.innerHTML = book.book_title;
+					cover = document.createElement('img');
+					cover.setAttribute('class','align-middle h-auto cover border-0 img-fluid');
+					cover.setAttribute('src',"<?=base_url('covers')?>/" + book.book_cover);
+					cover.setAttribute('width','140px');
 					
-					buttonDiv = document.createElement('div');
-					buttonDiv.setAttribute('class','col-12 col-md-6 col-lg-4 col-xl-3');
-					
-					editButton = document.createElement('a');
-					editButton.setAttribute('class','btn btn-outline-secondary me-2 mb-1');
-					editButton.innerHTML = "Edit Book";
+					caption = document.createElement('figcaption');
+					caption.setAttribute('class','figure-caption');
+					caption.innerHTML = book.book_title;
 					
 					deleteButton = document.createElement('button');
-					deleteButton.setAttribute('class','btn btn-outline-danger me-2 mb-1');
+					deleteButton.setAttribute('class','btn btn-outline-danger w-100 mt-auto');
 					deleteButton.setAttribute('data-bs-toggle','modal');
 					deleteButton.setAttribute('data-bs-target','#deleteModal');
 					deleteButton.setAttribute('onclick','setModalDeleteButton(' + book.book_id + ',"' + book.book_title + '")');
-					deleteButton.innerHTML = "Delete Book";
+					deleteButton.innerHTML = '<i class="bi bi-trash3-fill"></i> Delete';
 					
-					buttonDiv.append(editButton);
-					buttonDiv.append(deleteButton);
-					infoDiv.append(title);
-					infoDiv.append(buttonDiv);
-					bookLi.append(infoDiv);
-					listDiv.append(bookLi);
-				});
-				resultDiv.append(listDiv);
+					bookLink.append(cover);
+					bookLink.append(caption);
+					bookFigure.append(bookLink);
+					bookFigure.append(deleteButton);
+					bookDiv.append(bookFigure);					
+					resultDiv.append(bookDiv);
+				});	
 			} else {
 				message = document.createElement('p');
 				message.setAttribute('class','ms-2 mb-2');

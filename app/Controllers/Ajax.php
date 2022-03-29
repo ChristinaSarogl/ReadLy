@@ -42,10 +42,12 @@ class Ajax extends BaseController
 				$index = 0;
 				foreach($addedBooks as $bookEntry){
 					$book = $modelBook->getBook($bookEntry['id']);
+					$cover = $modelCover->getCover($book['cover']);
 					$passdata[$index] = [
 						'book_id' => $book['id'],
 						'book_slug' => $book['slug'],
 						'book_title' => $book['title'],
+						'book_cover' => $cover['file_name'],
 					];
 					$index++;
 				}	
