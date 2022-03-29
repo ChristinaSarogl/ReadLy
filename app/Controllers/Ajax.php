@@ -33,7 +33,27 @@ class Ajax extends BaseController
 				}
 			}
 			
-		} else{
+		} else if ($category == 5) {
+			$modelBook = model(BooksModel::class);
+			$modelCover = model(CoversModel::class);
+			
+			$addedBooks = $modelBook->getAddedByUser($userID);
+			if(!empty($addedBooks)){
+				$index = 0;
+				foreach($addedBooks as $bookEntry){
+					$book = $modelBook->getBook($bookEntry['id']);
+					$passdata[$index] = [
+						'book_id' => $book['id'],
+						'book_slug' => $book['slug'],
+						'book_title' => $book['title'],
+					];
+					$index++;
+				}	
+			} else {
+				$passdata['result'] = 'none';
+			}
+			
+		} else {
 			if ($category == 1){
 				$model = model(ToReadModel::class);
 			} elseif ($category == 2){

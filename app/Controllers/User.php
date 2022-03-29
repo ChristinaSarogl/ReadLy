@@ -8,6 +8,7 @@ class User extends BaseController
     {
 		$modelUsers = model(UsersModel::class);
 		$modelReviews = model(ReviewsModel::class);
+		$modelBooks = model(BooksModel::class);
 		
 		$user = $modelUsers->getUser($id);
 		$reviews = $modelReviews->getUserReviews($id);
@@ -22,6 +23,13 @@ class User extends BaseController
 			$data['reviewCount'] = count($reviews);
 		} else{
 			$data['reviewCount'] = 0;
+		}
+		
+		$addedBooks = $modelBooks->getAddedByUser($id);
+		if(!empty($addedBooks)){
+			$data['addedBooks'] = count($addedBooks);
+		} else {
+			$data['addedBooks'] = 0;
 		}
 		
         echo view('templates/header');

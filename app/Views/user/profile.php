@@ -26,6 +26,10 @@
 						<th>Reviews:</th>
 						<td><?= esc($reviewCount) ?></td>
 					</tr>
+					<tr>
+						<th>Added books:</th>
+						<td><?= esc($addedBooks) ?></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -51,6 +55,9 @@
 			<li class="nav-item">
 				<button class="nav-link link-dark" id="prof-reviews-link" onclick="setActive(4)">My Reviews</button>
 			</li>
+			<li class="nav-item">
+				<button class="nav-link link-dark" id="prof-added-link" onclick="setActive(5)">Added Books</button>
+			</li>
 		</ul>
 	</div>
 	
@@ -61,6 +68,7 @@
 			<option value="2">Reading</option>
 			<option value="3">Completed</option>
 			<option value="4">My Reviews</option>
+			<option value="5">Added Books</option>
 		</select> 
 	</div>
 	
@@ -213,6 +221,59 @@
 		});
 	}
 	
+	function getAddedBooks(userId) {
+		var resultDiv = document.getElementById('ajax-lists');
+		
+		fetch('https://mi-linux.wlv.ac.uk/~1801448/bookhood/public/index.php/ajax/getlists/5/' + userId)
+		.then(response => response.json())
+		.then(response => {			
+			if(response.result == undefined){	
+				listDiv = document.createElement('ul');
+				listDiv.setAttribute('class','list-group list-group-flush');
+				
+				response.forEach(function(book,index) {		
+					bookLi = document.createElement('li');
+					bookLi.setAttribute('class','list-group-item');
+					
+					infoDiv = document.createElement('div');
+					infoDiv.setAttribute('class','row');
+					
+					title = document.createElement('p');
+					title.setAttribute('class','col-12 col-md-6 col-lg-8 col-xl-9');
+					title.innerHTML = book.book_title;
+					
+					buttonDiv = document.createElement('div');
+					buttonDiv.setAttribute('class','col-12 col-md-6 col-lg-4 col-xl-3');
+					
+					editButton = document.createElement('a');
+					editButton.setAttribute('class','btn btn-outline-secondary me-2 mb-1');
+					editButton.innerHTML = "Edit Book";
+					
+					deleteButton = document.createElement('a');
+					deleteButton.setAttribute('class','btn btn-outline-danger me-2 mb-1');
+					deleteButton.innerHTML = "Delete Book";
+					
+					buttonDiv.append(editButton);
+					buttonDiv.append(deleteButton);
+					infoDiv.append(title);
+					infoDiv.append(buttonDiv);
+					bookLi.append(infoDiv);
+					listDiv.append(bookLi);
+				});
+				resultDiv.append(listDiv);
+			} else {
+				message = document.createElement('p');
+				message.setAttribute('class','ms-2 mb-2');
+				message.innerHTML = "You  haven't added any books yet.";
+				
+				resultDiv.append(message);
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+	
 	function setActive(category){
 		//Clear space
 		listsDiv = document.getElementById("ajax-lists");
@@ -239,8 +300,7 @@
 			document.getElementById('prof-reviews-link').setAttribute('class','nav-link active');
 			getReviews(<?php echo session()->get('id') ?>);
 			
-		} else if(category == 1){
-			
+		} else if(category == 1){			
 			document.getElementById('prof-want-link').setAttribute('class','nav-link active');
 			getList(category,<?php echo session()->get('id') ?>);
 		} else if (category == 2){
@@ -249,7 +309,10 @@
 		} else if (category == 3){
 			document.getElementById('prof-complete-link').setAttribute('class','nav-link active');
 			getList(category,<?php echo session()->get('id') ?>);
-		}		
+		} else if (category == 5) {
+			document.getElementById('prof-added-link').setAttribute('class','nav-link active');
+			getAddedBooks(<?php echo session()->get('id') ?>);
+		}			
 	}
 	
 	document.getElementById("mobileSelect").onchange = changeListener;  

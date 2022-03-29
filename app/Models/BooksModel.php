@@ -9,7 +9,7 @@ class BooksModel extends Model
     protected $table = 'books';
 	
 	protected $allowedFields = ['title', 'author', 'summary',
-		'publisher','release_date','slug', 'isbn', 'cover','category'];
+		'publisher','release_date','slug', 'isbn', 'cover','category', 'added_by'];
 	
 	public function getBook($id)
 	{
@@ -47,6 +47,11 @@ class BooksModel extends Model
 				return $similarBooks;
 			}				
 		}
+	}
+	
+	public function getAddedByUser($userId)
+	{
+		return $this->where(['added_by' => $userId])->orderBy('title', 'ASC')->findAll();
 	}
 	
 	public function sortCategoryByName($category)
