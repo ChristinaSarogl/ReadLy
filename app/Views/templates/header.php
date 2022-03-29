@@ -221,7 +221,7 @@
         </button>
 		
         <div class="collapse navbar-collapse" id="navbarContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
 				<li class="nav-item">
 					<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/home">Home</a>
 				</li>
@@ -245,11 +245,11 @@
 					<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/find-bookstore">Find Bookstore</a>
 				</li>
 				<?php if(!session()->get('isLoggedIn')): ?>
-					<li class="nav-item d-none d-lg-flex">
+					<li class="nav-item d-none d-md-flex">
 						<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/login">Login</a>
 					</li>
 				<?php else: ?>
-					<li class="nav-item d-none d-lg-flex">
+					<li class="nav-item d-none d-md-flex">
 						<a class="nav-link" aria-current="page" href="<?php echo base_url() ?>/profile/<?php echo session()->get('id') ?>">Profile</a>
 					</li>
 				<?php endif ?>
