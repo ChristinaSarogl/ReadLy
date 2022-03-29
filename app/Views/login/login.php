@@ -20,8 +20,6 @@
 				<label for="password">Password</label>
 			</div>
 
-			<p class="small mb-3 px-3 pb-lg-2 text-end"><a class="text-secondary" href="#!">Forgot password?</a></p>
-
 			<div class="mt-4 text-center">
 				<button type="submit" class="btn btn-outline-dark w-50">Login</button>
 			</div>
@@ -58,8 +56,6 @@
 							<input type="password" class="form-control" name="password" placeholder="Password" required>
 							<label for="password">Password</label>
 						</div>
-
-						<p class="small mb-3 px-3 pb-lg-2 text-end"><a class="text-secondary" href="#!">Forgot password?</a></p>
 
 						<div class="mt-4 text-center">
 							<button type="submit" class="btn btn-outline-light w-50">Login</button>
