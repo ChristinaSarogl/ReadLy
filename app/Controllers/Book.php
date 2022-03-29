@@ -29,7 +29,6 @@ class Book extends BaseController
 			]);
 			
 			$cover_id = $modelCover->getLastIndex();
-			print_r($cover_id);
 			
 			$modelBooks->save([
 				'title' => $this->request->getPost('title'),
