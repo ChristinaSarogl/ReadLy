@@ -39,7 +39,8 @@ class Book extends BaseController
 				'isbn' => $this->request->getPost('isbn'),
 				'slug'  => url_title($this->request->getPost('title'), '-', true),
 				'cover' => $cover_id,
-				'category' => $this->request->getPost('category')
+				'category' => $this->request->getPost('category'),
+				'added_by' => session()->get('id'),
 			]);
 			
 			return redirect()->to('/home');
