@@ -12,7 +12,7 @@ class CoversModel extends Model
 	
 	public function getLastIndex()
 	{
-		return $this->countAll();
+		return $this->orderBy('id', 'DESC')->first();
 	}
 	
 	public function getCover($id)
@@ -52,4 +52,5 @@ class CoversModel extends Model
 			}				
 		}
 	}
+	
 }

@@ -39,6 +39,7 @@ $routes->match(['get', 'post'], '/search', 'Home::search');
 
 $routes->get('/home', 'Home::home');
 $routes->get('/profile/(:segment)', 'User::profile/$1',['filter' => 'authGuard']);
+$routes->get('/delete-book/(:segment)', 'Book::deleteBook/$1');
 $routes->get('/book/(:segment)/(:segment)', 'Book::view/$1/$2');
 $routes->get('/browse/(:segment)', 'Home::category/$1');
 $routes->get('/search=(:segment)/opt=(:segment)', 'Home::search/$1/$2');

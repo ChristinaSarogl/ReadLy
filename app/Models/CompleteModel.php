@@ -14,4 +14,9 @@ class CompleteModel extends Model
 		return $this->where(['user_id' => $userID])->findAll();
 	}
 	
+	public function deleteBook($bookId)
+	{
+		$this->where(['book_id' => $bookId])->delete();
+	}
+	
 }

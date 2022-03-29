@@ -29,4 +29,9 @@ class ReviewsModel extends Model
 	{
 		return $this->where(['user_id' => $userId, 'book_id' => $bookId])->first();
 	}
+	
+	public function deleteBook($bookId)
+	{
+		$this->where(['book_id' => $bookId])->delete();
+	}
 }

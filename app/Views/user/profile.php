@@ -79,6 +79,25 @@
 	
 </div>
 
+<!-- Delete modal --->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Delete Book</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p id="modal-book-info"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a class="btn btn-danger" id="modal-delete-book">Delete book</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	function getReviews(userId){
 		var resultDiv = document.getElementById('ajax-reviews');
@@ -249,8 +268,11 @@
 					editButton.setAttribute('class','btn btn-outline-secondary me-2 mb-1');
 					editButton.innerHTML = "Edit Book";
 					
-					deleteButton = document.createElement('a');
+					deleteButton = document.createElement('button');
 					deleteButton.setAttribute('class','btn btn-outline-danger me-2 mb-1');
+					deleteButton.setAttribute('data-bs-toggle','modal');
+					deleteButton.setAttribute('data-bs-target','#deleteModal');
+					deleteButton.setAttribute('onclick','setModalDeleteButton(' + book.book_id + ',"' + book.book_title + '")');
 					deleteButton.innerHTML = "Delete Book";
 					
 					buttonDiv.append(editButton);
@@ -272,6 +294,15 @@
 		.catch(err => {
 			console.log(err);
 		});
+	}
+	
+	function setModalDeleteButton(bookId, title){
+		deleteButton = document.getElementById('modal-delete-book');
+		link = '<?php echo base_url() ?>/delete-book/' + bookId;
+		deleteButton.setAttribute('href', link);
+		
+		bookInfo = document.getElementById('modal-book-info');
+		bookInfo.innerHTML = "Are you sure you want to delete <strong>" + title + "</strong> ?";
 	}
 	
 	function setActive(category){

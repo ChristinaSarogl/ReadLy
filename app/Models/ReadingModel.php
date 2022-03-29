@@ -10,8 +10,13 @@ class ReadingModel extends Model
 	
 	protected $allowedFields = ['book_id', 'user_id'];
 	
-	public function getList($userID){
+	public function getList($userID)
+	{
 		return $this->where(['user_id' => $userID])->findAll();
 	}
 	
+	public function deleteBook($bookId)
+	{
+		$this->where(['book_id' => $bookId])->delete();
+	}
 }

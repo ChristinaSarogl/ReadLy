@@ -29,6 +29,7 @@ class Book extends BaseController
 			]);
 			
 			$cover_id = $modelCover->getLastIndex();
+			print_r($cover_id);
 			
 			$modelBooks->save([
 				'title' => $this->request->getPost('title'),
@@ -38,7 +39,7 @@ class Book extends BaseController
 				'release_date' => $this->request->getPost('release'),
 				'isbn' => $this->request->getPost('isbn'),
 				'slug'  => url_title($this->request->getPost('title'), '-', true),
-				'cover' => $cover_id,
+				'cover' => $cover_id['id'],
 				'category' => $this->request->getPost('category'),
 				'added_by' => session()->get('id'),
 			]);
@@ -144,6 +145,29 @@ class Book extends BaseController
 			$book = $modelBooks->getBook($bookId);
 			return redirect()->to('/book/'.$bookId.'/'.$book['slug']);
 		}
+	}
+	
+	public function deleteBook($bookId)
+	{		
+		$modelToRead = model(ToReadModel::class);
+		$modelReading = model(ReadingModel::class);
+		$modelComplete = model(CompleteModel::class);
+		$modelReviews = model(ReviewsModel::class);
+		$modelBooks = model(BooksModel::class);
+		$modelCover = model(CoversModel::class);
+		
+		$book = $modelBooks->getBook($bookId);
+		$cover = $modelCover->getCover($book['cover']);
+		
+		$modelToRead->deleteBook($bookId);
+		$modelReading->deleteBook($bookId);
+		$modelComplete->deleteBook($bookId);
+		$modelReviews->deleteBook($bookId);
+		
+		unlink(ROOTPATH.'public/covers/'.$cover['file_name']);		
+		$modelCover->where('id', $cover['id'])->delete();
+		
+		return redirect()->to('/profile/'.session()->get('id'));
 	}
 	
 }
