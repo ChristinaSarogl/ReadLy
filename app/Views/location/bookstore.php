@@ -1,4 +1,4 @@
-<p class="fs-3 pt-3 text-center">Find a Bookstore</p>
+<p class="fs-3 pt-2 text-center">Find a Bookstore</p>
 <p class="fs-5 text-danger text-center" id="gps-error" style="display:none;">Place enable your GPS location.</p>
 <div class="container mt-3 p-2 border border-dark border-2 rounded" id="map-container">
 	<div id="bookstore-map" style="height:600px;">
