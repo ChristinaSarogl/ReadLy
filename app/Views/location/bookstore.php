@@ -68,5 +68,5 @@ function handleLocationError(browserHasGeolocation) {
 </script>
 
 <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZzkbVzgL3ELWNKbsdZajeMupi-BdZ32M&libraries=localContext,places&v=beta&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=apiKey&libraries=localContext,places&v=beta&callback=initMap">
 </script>
